@@ -1,13 +1,14 @@
 import ch.qos.logback.core.util.FileSize
-import grails.util.Environment
 import org.springframework.boot.logging.logback.ColorConverter
 import org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter
 
 conversionRule 'clr', ColorConverter
 conversionRule 'wex', WhitespaceThrowableProxyConverter
-def loggingDir = '//data/images/logs/'
-def appName = 'images'
+
+final loggingDir = '//var/log/atlas/image-service/'
+final appName = 'image-service'
 final APPLICATION_LOG = 'APPLICATION_LOG'
+
 appender(APPLICATION_LOG, RollingFileAppender) {
     file = "${loggingDir}/${appName}.log"
     encoder(PatternLayoutEncoder) {
@@ -28,7 +29,7 @@ appender(APPLICATION_LOG, RollingFileAppender) {
     }
 }
 
-root(DEBUG, [APPLICATION_LOG])
+root(ERROR, [APPLICATION_LOG])
 final error = [
 ]
 final warn = [
