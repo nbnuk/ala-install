@@ -6,3 +6,4 @@
 
 # DM: This was the only online repository I could find for this unzip web archive
 geoserver_war_url: "https://repo.boundlessgeo.com/main/org/geoserver/web/gs-web-app/2.14.1/gs-web-app-2.14.1.war"
+skip_geoserver_script: false

@@ -80,6 +80,10 @@ ala.baseURL: {{ ala_base_url | default('https://www.ala.org.au') }}
 bie.baseURL: {{ bie_base_url | default('https://bie.ala.org.au') }}
 bie.searchPath: '/search'
 
+previewmap.latitude: {{ previewmap_latitude | default(-22) }}
+previewmap.longitude: {{ previewmap_longitude | default(122) }}
+previewmap.zoom {{ previewmap_zoom | default(4) }}
+
 records.url: {{ records_url | default('https://archives.ala.org.au/archives/exports/lat_lon_taxon.zip') }}
 
 api_key: {{ spatial_service_api_key  | default('') }}
