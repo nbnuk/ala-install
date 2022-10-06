@@ -232,14 +232,50 @@
     ala_name_indexes_repo: "{{ ala_nameindex_source_url | default('https://archives.ala.org.au/archives/nameindexes') }}/{{name_index_date}}"
     ala_name_data_repo: "{{ ala_namedata_source_url | default('https://archives.ala.org.au/archives/nameindexes') }}/{{name_data_date}}"
   tags:
-    - setfacts    
+    - setfacts
+
+
+- name: explicitly set use gbif nexus true for nbn artifacts
+  set_fact:
+    use_gbif_nexus: true
+  when: groupId is defined and groupId is match("uk.org.nbn")
+  tags:
+    - setfacts
+
+- name: explicitly set use gbif nexus false for ala artifacts
+  set_fact:
+    use_gbif_nexus: false
+  when: groupId is defined and groupId is not match("uk.org.nbn")
+  tags:
+    - setfacts
+
+- name: explicitly set release directory for nbn snapshots
+  set_fact:
+    maven_release_dir: "uk-nbn-snapshots"
+  when: groupId is defined and groupId is match("uk.org.nbn") and version is search("-SNAPSHOT")
+  tags:
+    - setfacts
+
+- name: explicitly set release directory for nbn releases
+  set_fact:
+    maven_release_dir: "uk-nbn-releases"
+  when: groupId is defined and groupId is match("uk.org.nbn") and version is not search("-SNAPSHOT")
+  tags:
+    - setfacts
+
+- name: explicitly set release directory for ala releases
+  set_fact:
+    maven_release_dir: "ala-release"
+  when: groupId is defined and groupId is not match("uk.org.nbn")
+  tags:
+    - setfacts
 
 - name: using the ALA nexus repository
   set_fact:
     maven_repo_base_url: "https://nexus.ala.org.au/content/groups/"
     maven_repo_url: "https://nexus.ala.org.au/content/groups/{{maven_release_dir|default('public')}}"
     maven_repo_ws_url: "https://nexus.ala.org.au/service/local/artifact/maven/redirect?r={{maven_release_dir | default('public')}}&g={{groupId | default('au.org.ala')}}&a={{artifactId | default('')}}&v={{version | default('')}}&e={{packaging | default('war')}}&c={{classifier | default('')}}"
-  when: use_gbif_nexus is not defined or use_gbif_nexus == "false"
+  when: use_gbif_nexus is not defined or use_gbif_nexus == "false" or use_gbif_nexus == false
   tags:
     - setfacts  
 
@@ -248,7 +284,7 @@
     maven_repo_base_url: "http://repository.gbif.org/content/groups/"
     maven_repo_url: "http://repository.gbif.org/content/groups/{{maven_release_dir|default('ala-release')}}"
     maven_repo_ws_url: "http://repository.gbif.org/service/local/artifact/maven/redirect?r={{maven_release_dir | default('ala-release')}}&g={{groupId | default('au.org.ala')}}&a={{artifactId | default('')}}&v={{version | default('')}}&e={{packaging | default('war')}}&c={{classifier | default('')}}"
-  when: use_gbif_nexus is defined and use_gbif_nexus == "true"
+  when: use_gbif_nexus is defined and (use_gbif_nexus == "true" or use_gbif_nexus == true)
   tags:
     - setfacts  
 
