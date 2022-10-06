@@ -4,6 +4,6 @@ artifactId: "userdetails-nbn"
 classifier: 'exec'
 packaging: "{{ (user_details_version is version('3', '>=')) | ternary('war', 'jar') }}"
 groupId: "uk.org.nbn"
-userdetails_jar_url: "{{ userdetails_maven_repo_ws_url | default(maven_repo_ws_url) }}"
+userdetails_jar_url: "{{maven_repo_ws_url}}"
 
 tomcat_java_opts_override: "{{ tomcat_java_opts_override_value | default('-Xmx4g -Xms2g -Xss256k -XX:+UseG1GC') }} {{java_security_opts}}"
