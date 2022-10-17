@@ -265,7 +265,7 @@
 
 - name: explicitly set release directory for ala releases
   set_fact:
-    maven_release_dir: "release"
+    maven_release_dir: "releases"
   when: groupId is defined and groupId is not match("uk.org.nbn")
   tags:
     - setfacts
