@@ -1,7 +1,7 @@
 - hosts: logger-service
   vars:
-    use_openjdk11: "{{ logger_version is version('4.1.0', '>=') }}"
-    use_openjdk8: "{{ logger_version is version('4.1.0', '<') }}"
+    use_openjdk11: "{{ logger_version is version('4', '>=') }}"
+    use_openjdk8: "{{ logger_version is version('4', '<') }}"
   roles:
     - common
     - java
