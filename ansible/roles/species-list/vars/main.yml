@@ -1,7 +1,7 @@
 # assets
 version: "{{ species_list_version | default('LATEST') }}"
-artifactId: "specieslist-webapp"
-groupId: "au.org.ala"
+artifactId: "specieslist-webapp-nbn"
+groupId: "uk.org.nbn"
 specieslist_war_url: "{{maven_repo_ws_url}}"
 classifier: ""
 packaging: "war"
