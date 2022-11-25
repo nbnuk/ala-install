@@ -2,6 +2,6 @@
 version: "{{ species_list_version | default('LATEST') }}"
 artifactId: "specieslist-webapp-nbn"
 groupId: "uk.org.nbn"
-specieslist_war_url: "{{maven_repo_ws_url}}"
+specieslist_war_url: "{{ specieslist_maven_repo_ws_url | default(maven_repo_ws_url) }}"
 classifier: ""
 packaging: "war"
