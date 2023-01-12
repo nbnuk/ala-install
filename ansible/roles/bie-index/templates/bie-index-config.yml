@@ -15,10 +15,13 @@ security:
     logoutUrl:   {{ auth_cas_url }}/logout
     contextPath:   {{ bie_index_context_path }}
     bypass:   {{ bypass_cas | default(true) }}
+    enabled: {{ security_cas_enabled | default(true) }}
+
   oidc:
     clientId: {{ clientId | default('') }}
     secret: {{ secret | default('') }}
     discoveryUri: {{ discoveryUri | default('') }}
+    enabled: {{ security_oidc_enabled | default(false) }}
   jwt:
     discoveryUri: {{ discoveryUri | default('') }}
   apikey:
@@ -70,6 +73,8 @@ naming:
 attribution:
   default: {{ default_name_source | default('National Species Lists') }}
   common: {{ default_common_name_source | default('National Species Lists') }}
+  identifier: {{ default_identifier_source | default('National Species Lists') }}
+  synonym: {{ default_synonym_source | default('National Species Lists') }}
 commonName:
   # Acceptable vernacular names to appear in autocomplete and primary name eg en,en-AU,en-CA,en-GB,en-US (leave empty for any language)
   languages: {{ vernacular_languages | default('') }}
@@ -80,6 +85,14 @@ conservationListsUrl: file://{{ data_dir }}/bie-index/config/conservation-lists.
 vernacularListsUrl: file://{{ data_dir }}/bie-index/config/vernacular-lists.json
 #nationalSpeciesDatasets: dr2699,dr2700,dr2702,dr2704,dr2703,dr3118
 nationalSpeciesDatasets: ""
+
+#nbn - conditional override added
+{% if default_download_fields is defined %}
+defaultDownloadFields: {{ default_download_fields }}
+{% endif %}
+
+additionalResultFields: {{ additional_results_fields | default('""') }}
+
 solr:
   live:
     connection: {{ index_live_url | default('http://localhost:8983/solr/bie') }}
@@ -101,6 +114,9 @@ solr:
       - exact_text
       - text
       - content^0.2
+    { % if solr_bq is defined % }
+    bq: {{ solr_bq }}
+    { % endif % }
     boost: {{ solr_bie_boost_term | default('searchWeight') }}
     defType: {{ solr_deftype | default('edismax') }}
     qAlt: {{ solr_qlat | default('text:*') }}
