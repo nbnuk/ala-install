@@ -114,9 +114,9 @@ solr:
       - exact_text
       - text
       - content^0.2
-    {% if solr_bq is defined %}
+{% if solr_bq is defined %}
     bq: {{ solr_bq }}
-    {% endif %}
+{% endif %}
     boost: {{ solr_bie_boost_term | default('searchWeight') }}
     defType: {{ solr_deftype | default('edismax') }}
     qAlt: {{ solr_qlat | default('text:*') }}
