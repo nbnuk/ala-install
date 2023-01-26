@@ -28,9 +28,10 @@ INSERT INTO users (userid, username, firstname, lastname, email, activated, lock
 --     });
 --   });
 --
-INSERT INTO passwords (userid, password, type, status)
-    SELECT userid, password, type, status
-    FROM (SELECT 1 as userid,'{{ cas_first_admin_bcrypt_password }}' as password, 'bcrypt' as type, 'CURRENT' as status) t
+-- NBN have removed the setting of password type as the migrations need to add this first
+INSERT INTO passwords (userid, password, status)
+    SELECT userid, password, status
+    FROM (SELECT 1 as userid,'{{ cas_first_admin_bcrypt_password }}' as password, 'CURRENT' as status) t
     WHERE NOT EXISTS (SELECT 1 FROM passwords p WHERE p.userid = t.userid);
 --
 -- User Profiles
