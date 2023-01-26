@@ -40,11 +40,10 @@ INSERT INTO profiles (userid, property, value)
     FROM (SELECT 1 as userId, 'city' as property, '' as value) t
     WHERE NOT EXISTS (SELECT 1 FROM profiles u WHERE u.userid = t.userid AND u.property = t.property);
 --
--- this gets handled in migration
---INSERT INTO profiles (userid, property, value)
-    --SELECT userid, property, value
-    --FROM (SELECT 1 as userId, 'country' as property, '' as value) t
-    --WHERE NOT EXISTS (SELECT 1 FROM profiles u WHERE u.userid = t.userid AND u.property = t.property);
+INSERT INTO profiles (userid, property, value)
+    SELECT userid, property, value
+    FROM (SELECT 1 as userId, 'country' as property, '' as value) t
+    WHERE NOT EXISTS (SELECT 1 FROM profiles u WHERE u.userid = t.userid AND u.property = t.property);
 --
 INSERT INTO profiles (userid, property, value)
     SELECT userid, property, value
