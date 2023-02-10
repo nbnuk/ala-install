@@ -1,143 +1,337 @@
-[{
-  "name": "Animals",
-  "rank": "kingdom",
-  "included": ["Animalia"],
-  "excluded": []
-},
+[
   {
-    "name": "Mammals",
-    "rank": "classs",
-    "included": ["Mammalia"],
-    "excluded": [],
-    "parent": "Animals"
-  },
-  {
-    "name": "Birds",
-    "rank": "classs",
-    "included": ["Aves"],
-    "excluded": [],
-    "parent": "Animals"
-  },
-  {
-    "name": "Reptiles",
-    "rank": "classs",
-    "included": ["Reptilia"],
-    "excluded": [],
-    "parent": "Animals"
+    "name": "Animals",
+    "rank": "kingdom",
+    "included": [
+      "Animalia"
+    ]
   },
   {
     "name": "Amphibians",
-    "rank": "classs",
-    "included": ["Amphibia"],
-    "excluded": [],
-    "parent": "Animals"
-  },
-  {
-    "name": "Fishes",
-    "rank": "classs",
-    "included": ["Agnatha", "Chondrichthyes", "Osteichthyes", "Actinopterygii", "Sarcopterygii"],
-    "excluded": [],
-    "parent": "Animals"
-  },
-  {
-    "name": "Molluscs",
-    "rank": "phylum",
-    "included": ["Mollusca"],
-    "excluded": [],
+    "rank": "order",
+    "included": [
+      "ANURA",
+      "CAUDATA"
+    ],
     "parent": "Animals"
   },
   {
     "name": "Arthropods",
     "rank": "phylum",
-    "included": ["Arthropoda"],
-    "excluded": [],
+    "included": [
+      "Arthropoda"
+    ],
     "parent": "Animals"
   },
   {
     "name": "Crustaceans",
-    "rank": "classs",
-    "included": ["Branchiopoda", "Remipedia", "Maxillopoda", "Ostracoda", "Malacostraca"],
-    "excluded": [],
+    "rank": "class",
+    "included": [
+      "BRANCHIOPODA",
+      "MALACOSTRACA",
+      "MAXILLOPODA",
+      "OSTRACODA"
+    ],
     "parent": "Arthropods"
   },
   {
     "name": "Insects",
-    "rank": "classs",
-    "included": ["Insecta"],
-    "excluded": [],
+    "rank": "order",
+    "included": [
+      "ARCHAEOGNATHA",
+      "COLEOPTERA",
+      "DERMAPTERA",
+      "DICTYOPTERA",
+      "DIPTERA",
+      "EPHEMEROPTERA",
+      "HEMIPTERA",
+      "HYMENOPTERA",
+      "LEPIDOPTERA",
+      "MANTODEA",
+      "MECOPTERA",
+      "MEGALOPTERA",
+      "NEUROPTERA",
+      "ODONATA",
+      "ORTHOPTERA",
+      "PHASMIDA",
+      "PHTHIRAPTERA",
+      "PLECOPTERA",
+      "PSOCOPTERA",
+      "RAPHIDIOPTERA",
+      "SIPHONAPTERA",
+      "STREPSIPTERA",
+      "THYSANOPTERA",
+      "TRICHOPTERA",
+      "ZYGENTOMA"
+    ],
     "parent": "Arthropods"
   },
   {
-    "name": "Plants",
-    "rank": "kingdom",
-    "included": ["Plantae"],
-    "excluded": []
+    "name": "Myriapods",
+    "rank": "class",
+    "included": [
+      "CHILOPODA",
+      "DIPLOPODA",
+      "PAUROPODA",
+      "SYMPHYLA"
+    ],
+    "parent": "Arthropods"
   },
   {
-    "name": "Gymnosperms",
-    "rank": "subclass",
-    "included": ["Pinidae", "Cycadidae"],
-    "excluded": [],
-    "parent": "Plants"
+    "name": "SpidersAndAllies",
+    "rank": "order",
+    "included": [
+      "Pantopoda",
+      "Araneae",
+      "Ixodida",
+      "Opiliones",
+      "Oribatida",
+      "Prostigmata",
+      "Pseudoscorpiones",
+      "Scorpiones"
+    ],
+    "parent": "Arthropods"
   },
   {
-    "name": "FernsAndAllies",
-    "rank": "subclass",
-    "included": ["Equisetidae", "Lycopodiidae", "Marattiidae", "Ophioglossidae", "Polypodiidae", "Psilotidae"],
-    "excluded": [],
-    "parent": "Plants"
+    "name": "Birds",
+    "rank": "order",
+    "included": [
+      "ANSERIFORMES",
+      "APODIFORMES",
+      "BUCEROTIFORMES",
+      "CHARADRIIFORMES",
+      "CICONIIFORMES",
+      "COLUMBIFORMES",
+      "CORACIIFORMES",
+      "CUCULIFORMES",
+      "FALCONIFORMES",
+      "GALLIFORMES",
+      "GAVIIFORMES",
+      "GRUIFORMES",
+      "PASSERIFORMES",
+      "PELECANIFORMES",
+      "PHOENICOPTERIFORMES",
+      "PICIFORMES",
+      "PODICIPEDIFORMES",
+      "PROCELLARIIFORMES",
+      "RHEIFORMES",
+      "STRIGIFORMES",
+      "STRUTHIONIFORMES",
+      "UPUPIFORMES"
+    ],
+    "parent": "Animals"
   },
   {
-    "name": "Angiosperms",
-    "rank": "subclass",
-    "included": ["Magnoliidae"],
-    "excluded": [],
-    "parent": "Plants"
+    "name": "Fishes",
+    "rank": "class",
+    "included": [
+      "ACTINOPTERYGII",
+      "CEPHALASPIDOMORPHI",
+      "ELASMOBRANCHII",
+      "HOLOCEPHALI",
+      "MYXINI"
+    ],
+    "parent": "Animals"
   },
   {
-    "name": "Monocots",
-    "rank": "superorder",
-    "included": ["Lilianae"],
-    "excluded": [],
-    "parent": "Angiosperms"
+    "name": "Mammals",
+    "rank": "order",
+    "included": [
+      "ARTIODACTYLA",
+      "CARNIVORA",
+      "CETARTIODACTYLA",
+      "CHIROPTERA",
+      "DIPROTODONTIA",
+      "INSECTIVORA",
+      "LAGOMORPHA",
+      "PERRISODACTYLA",
+      "PRIMATES",
+      "RODENTIA"
+    ],
+    "parent": "Animals"
   },
   {
-    "name": "Dicots",
-    "rank": "subclass",
-    "included": ["Magnoliidae"],
-    "excluded": ["Lilianae"],
-    "parent": "Angiosperms"
+    "name": "Molluscs",
+    "rank": "class",
+    "included": [
+      "BIVALVIA",
+      "CAUDOFOVEATA",
+      "CEPHALOPODA",
+      "GASTROPODA",
+      "POLYPLACOPHORA",
+      "SCAPHOPODA",
+      "SOLENOGASTRES"
+    ],
+    "parent": "Animals"
   },
   {
-    "name": "Fungi",
-    "rank": "kingdom",
-    "included": ["Fungi"],
-    "excluded": []
+    "name": "Reptiles",
+    "rank": "order",
+    "included": [
+      "SQUAMATA",
+      "TESTUDINES"
+    ],
+    "parent": "Animals"
   },
   {
-    "name": "Chromista",
-    "rank": "kingdom",
-    "included": ["Chromista"],
-    "excluded": []
-  },
-  {
-    "name": "Protozoa",
-    "rank": "kingdom",
-    "included": ["Protozoa"],
-    "excluded": []
+    "name": "Worms",
+    "rank": "phylum",
+    "included": [
+      "ANNELIDA",
+      "CHAETOGNATHA",
+      "ECHIURA",
+      "NEMATODA",
+      "NEMATOMORPHA",
+      "NEMERTEA",
+      "PLATYHELMINTHES",
+      "PRIAPULIDA",
+      "SIPUNCULA"
+    ],
+    "parent": "Animals"
   },
   {
     "name": "Bacteria",
     "rank": "kingdom",
-    "included": ["Bacteria"],
-    "excluded": []
+    "included": [
+      "Bacteria"
+    ]
+  },
+  {
+    "name": "Chromista",
+    "rank": "kingdom",
+    "included": [
+      "Chromista"
+    ]
+  },
+  {
+    "name": "Fungi",
+    "rank": "phylum",
+    "included": [
+      "Ascomycota",
+      "Basidiomycota",
+      "Chytridiomycota",
+      "Zygomycota",
+      "Glomeromycota"
+    ]
+  },
+  {
+    "name": "Plants",
+    "rank": "kingdom",
+    "included": [
+      "Plantae"
+    ]
+  },
+  {
+    "name": "Algae",
+    "rank": "division",
+    "included": [
+      "Algae",
+      "Charophyta",
+      "Chlorophycota",
+      "Chlorophycota",
+      "Encrusting green algae",
+      "Filamentous green algae",
+      "Filamentous red algae",
+      "Foliose green algae",
+      "Foliose red algae",
+      "Rhodophycota indet. (non-calc. crusts)"
+    ],
+    "parent": "Plants"
   },
   {
     "name": "Algae",
     "rank": "phylum",
-    "included": ["Bacillariophyta", "Chlorophyta", "Cyanidiophyta", "Prasinophyta", "Rhodophyta",
-      "Cryptophyta", "Ochrophyta", "Sagenista", "Cercozoa", "Euglenozoa", "Cyanobacteria"
+    "included": [
+      "Rhodophyta",
+      "Conjugatophyta",
+      "Glaucophyta",
+      "Charophyta",
+      "Magnoliophyta",
+      "Chlorophyta"
     ],
-    "excluded": []
+    "parent": "Plants"
+  },
+  {
+    "name": "Bryophytes",
+    "rank": "phylum",
+    "included": [
+      "Bryophyta",
+      "Marchantiophyta"
+    ],
+    "parent": "Plants"
+  },
+  {
+    "name": "ClubmossesAndFirmosses",
+    "rank": "order",
+    "included": [
+      "Selaginellales",
+      "Lycopodiales",
+      "Lycopodiopsida"
+    ],
+    "parent": "Plants"
+  },
+  {
+    "name": "FernsAndAllies",
+    "rank": "phylum",
+    "included": [
+      "Pteridophyta"
+    ],
+    "parent": "Plants"
+  },
+  {
+    "name": "FernsAndAllies",
+    "rank": "order",
+    "included": [
+      "Isoetales",
+      "Equisetales"
+    ],
+    "parent": "Plants"
+  },
+  {
+    "name": "FloweringPlants",
+    "rank": "division",
+    "included": [
+      "Anthophyta"
+    ],
+    "parent": "Plants"
+  },
+  {
+    "name": "FloweringPlants",
+    "rank": "class",
+    "included": [
+      "Magnoliopsida"
+    ],
+    "parent": "Plants"
+  },
+  {
+    "name": "GymnospermsAndGinkgo",
+    "rank": "class",
+    "included": [
+      "Pinopsida"
+    ],
+    "parent": "Plants"
+  },
+  {
+    "name": "GymnospermsAndGinkgo",
+    "rank": "class",
+    "included": [
+      "Ginkgoopsida"
+    ],
+    "parent": "Plants"
+  },
+  {
+    "name": "Hornworts",
+    "rank": "division",
+    "included": [
+      "Anthocerophyta"
+    ],
+    "parent": "Plants"
+  },
+  {
+    "name": "Protozoa",
+    "rank": "kingdom",
+    "included": [
+      "Protozoa"
+    ]
   }
 ]
