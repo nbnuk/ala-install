@@ -6,10 +6,33 @@
     - nginx_vhost
 
 - include: ./apt.yml
+  when: namematching_service_version is defined and namematching_service_version is not search("-NBN")
   tags:
     - namematching-service
     - deploy
     - apt
+
+#NBN need to install custom JAR file over the top of version installed by apt - first install with ala version then set the nbn version and run again
+- name: "Download ala-namematching-service JAR"
+  maven_artifact:
+    group_id: "{{groupId}}"
+    artifact_id: "{{artifactId}}"
+    version: "{{namematching_service_version}}"
+    extension: "{{packaging|default('jar')}}"
+    classifier: "{{classifier|default('')}}"
+    repository_url: "{{maven_repo_url}}"
+    timeout: 30
+    dest: "/opt/atlas/ala-namematching-service/{{artifactId}}.jar"
+    mode: u=rwx,g=rx,o=rx
+    owner: namematching
+    group: namematching
+    verify_checksum: always
+  notify: "restart ala-namematching-service"
+  when: namematching_service_version is defined and namematching_service_version is search("-NBN")
+  tags:
+    - namematching-service
+    - deploy
+    - service
 
 - name: Customize configuration already added by apt package
   template:
