@@ -112,10 +112,15 @@ solr:
     queueSize: 10
     threadCount: 4
   search:
-    qf:
-      - exact_text
-      - text
-      - content^0.2
+    qf: {% if solr_qf == '' %}{{ '[]' }}
+{% else %}
+{% set solr_qf_list = (solr_qf|default("exact_text,text,content^0.2")).split(',') %}
+{% for item in solr_qf_list %}
+{% if item != '' %}
+      - {{ item }}
+{% endif %}
+{% endfor %}
+{% endif %}
 {% if solr_bq is defined %}
     bq: {{ solr_bq }}
 {% endif %}
