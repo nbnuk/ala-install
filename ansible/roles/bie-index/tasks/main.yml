@@ -40,6 +40,7 @@
     - image-lists.json
     - vernacular-lists.json
     - favourites.json
+    - locality-keywords.json
   tags:
     - config
     - properties
