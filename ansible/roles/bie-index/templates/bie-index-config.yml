@@ -21,7 +21,6 @@ security:
     clientId: {{ (bie_index_clientId | default(clientId)) | default('') }}
     secret: {{ (bie_index_secret | default(secret)) | default('') }}
     discoveryUri: {{ discoveryUri | default('') }}
-    enabled: {{ security_oidc_enabled | default(false) }}
   jwt:
     discoveryUri: {{ discoveryUri | default('') }}
   apikey:
