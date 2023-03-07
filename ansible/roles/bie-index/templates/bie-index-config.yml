@@ -21,7 +21,6 @@ security:
     clientId: {{ (bie_index_clientId | default(clientId)) | default('') }}
     secret: {{ (bie_index_secret | default(secret)) | default('') }}
     discoveryUri: {{ discoveryUri | default('') }}
-    enabled: {{ security_oidc_enabled | default(false) }}
   jwt:
     discoveryUri: {{ discoveryUri | default('') }}
   apikey:
@@ -85,6 +84,8 @@ commonName:
 conservationListsUrl: file://{{ data_dir }}/bie-index/config/conservation-lists.json
 # Location of vernacular name lists (null for default)
 vernacularListsUrl: file://{{ data_dir }}/bie-index/config/vernacular-lists.json
+# NBN Location of locality keywords (null for default)
+localityKeywordsUrl: file://{{ data_dir }}/bie-index/config/locality-keywords.json
 #nationalSpeciesDatasets: dr2699,dr2700,dr2702,dr2704,dr2703,dr3118
 nationalSpeciesDatasets: ""
 
@@ -112,10 +113,15 @@ solr:
     queueSize: 10
     threadCount: 4
   search:
-    qf:
-      - exact_text
-      - text
-      - content^0.2
+    qf: {% if solr_qf == '' %}{{ '[]' }}
+{% else %}
+{% set solr_qf_list = (solr_qf|default("exact_text,text,content^0.2")).split(',') %}
+{% for item in solr_qf_list %}
+{% if item != '' %}
+      - {{ item }}
+{% endif %}
+{% endfor %}
+{% endif %}
 {% if solr_bq is defined %}
     bq: {{ solr_bq }}
 {% endif %}
