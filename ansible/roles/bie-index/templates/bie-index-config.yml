@@ -123,7 +123,13 @@ solr:
 {% endfor %}
 {% endif %}
 {% if solr_bq is defined %}
-    bq: {{ solr_bq }}
+{% set solr_bq_list = (solr_bq|default("")).split(',') %}
+    bq:
+{% for item in solr_bq_list %}
+{% if item != '' %}
+      - {{ item }}
+{% endif %}
+{% endfor %}
 {% endif %}
     boost: {{ solr_bie_boost_term | default('searchWeight') }}
     defType: {{ solr_deftype | default('edismax') }}
