@@ -113,22 +113,16 @@ solr:
     queueSize: 10
     threadCount: 4
   search:
-    qf: {% if solr_qf == '' %}{{ '[]' }}
-{% else %}
-{% set solr_qf_list = (solr_qf|default("exact_text,text,content^0.2")).split(',') %}
-{% for item in solr_qf_list %}
-{% if item != '' %}
+{% if solr_qf is defined %}
+    qf:
+{% for item in solr_qf %}
       - {{ item }}
-{% endif %}
 {% endfor %}
 {% endif %}
 {% if solr_bq is defined %}
-{% set solr_bq_list = (solr_bq|default("")).split(',') %}
     bq:
-{% for item in solr_bq_list %}
-{% if item != '' %}
+{% for item in solr_bq %}
       - {{ item }}
-{% endif %}
 {% endfor %}
 {% endif %}
     boost: {{ solr_bie_boost_term | default('searchWeight') }}
