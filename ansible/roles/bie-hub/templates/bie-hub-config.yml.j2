@@ -39,7 +39,7 @@ bie:
 # Query contexts - used to filter search results
 bieService:
   baseUrl: {{ bie_index_base_url }}{{ bie_index_context_path }}
-  queryContext: {{ bie_query_context }}
+  queryContext: "{{ bie_query_context }}"
   apiKey: {{ bie_index_api_key }}
 biocacheService:
   baseURL: {{ biocache_service_url }}
