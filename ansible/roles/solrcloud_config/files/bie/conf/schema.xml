@@ -343,7 +343,7 @@
    <field name="taxonGuid" type="string" indexed="true" stored="true" required="false" multiValued="false"/>
    <field name="parentGuid" type="string" indexed="true" stored="true" omitNorms="true" />
    <field name="otherGuid" type="string" indexed="true" stored="true" required="false" multiValued="true"/>
-   <field name="synonym" type="string" indexed="true" stored="true" multiValued="true" omitNorms="false" />
+   <field name="synonym" type="text" indexed="true" stored="true" multiValued="true" omitNorms="false" />
    <field name="nomenclaturalCode" type="lowercase" indexed="true" stored="true" omitNorms="true" />
    <field name="scientificName" type="lowercase" indexed="true" stored="true" omitNorms="false" />
    <field name="scientificNameAuthorship" type="lowercase" indexed="true" stored="true" omitNorms="false" />
