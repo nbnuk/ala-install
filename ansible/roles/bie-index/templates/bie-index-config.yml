@@ -149,7 +149,7 @@ bie:
   searchPath: {{ bie_search_path | default('/search') }}
 
 geoserverUrl: {{ geoserver_url }}
-regionFeaturedLayerIds: {{ region_featured_layer_ids }}
+regionFeaturedLayerIds: "{{ region_featured_layer_ids }}"
 regionFeaturedLayerFields: {{ region_featured_layer_fields }}
 regionFeaturedLayerIDfield: {{ region_featured_layer_id_field }}
 regionFeaturedLayerSampledField: {{ region_featured_layer_sampled_field }}
