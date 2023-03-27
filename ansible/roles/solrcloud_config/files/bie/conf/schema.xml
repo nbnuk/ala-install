@@ -487,7 +487,6 @@
    <!-- NBN additional fields -->
    <field name="synonymComplete" type="name_complete" indexed="true" stored="true" multiValued="true" omitNorms="false" /> <!-- RR 20200114 was string -->
    <field name="speciesCount" type="int" indexed="true" stored="true" multiValued="false" omitNorms="true" />
-   <field name="scientific_name" type="name_complete" indexed="true" stored="false" multiValued="false" omitNorms="true"/>
    <!-- RR Feb 2020 for BBG -->
    <field name="bbg_name_s" type="string" indexed="true" stored="true" multiValued="false" /> <!-- was text RR if not explicitly named, then a string -->
    <field name="point-0.0001" type="string" indexed="true" stored="true" omitNorms="true" />
