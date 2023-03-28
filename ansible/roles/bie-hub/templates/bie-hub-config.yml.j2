@@ -39,7 +39,7 @@ bie:
 # Query contexts - used to filter search results
 bieService:
   baseUrl: {{ bie_index_base_url }}{{ bie_index_context_path }}
-  queryContext: {{ bie_query_context }}
+  queryContext: {{ bie_query_context | to_nice_yaml }}
   apiKey: {{ bie_index_api_key }}
 biocacheService:
   baseURL: {{ biocache_service_url }}
@@ -144,6 +144,17 @@ map:
   simpleMapButton: {{ map_simpleMapButton }}
   records:
     colour: {{ default_map_colour }}
+# NBN added inline with readme
+  env:
+    legendtitle: {{ map_env_legendtitle }}
+    options: {{ map_env_options }}
+  layers:
+    fqs: {{ map_layers_fqs }}
+    labels: {{ map_layers_labels }}
+    colours: {{ map_layers_colours }}
+
+# NBN added override
+additionalResultsFields: {{ additional_results_fields | to_nice_yaml }}
 
 {% if vernacular_pull_categories is defined %}
 # A category of vernacular names pulled out from the standard list and given special display treatment
@@ -194,3 +205,6 @@ survey:
     header: {{ bie_survey_header | default('') }}
     cookieAge: {{ bie_survey_cookieAge | default(30) }}
     html: {{ bie_survey_html | default('') }}
+
+# NBN custom
+additionalMapFilter: {{ additional_map_filter  | to_nice_yaml }}

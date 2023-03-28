@@ -113,17 +113,17 @@ solr:
     queueSize: 10
     threadCount: 4
   search:
-    qf: {% if solr_qf == '' %}{{ '[]' }}
-{% else %}
-{% set solr_qf_list = (solr_qf|default("exact_text,text,content^0.2")).split(',') %}
-{% for item in solr_qf_list %}
-{% if item != '' %}
+{% if solr_qf is defined %}
+    qf:
+{% for item in solr_qf %}
       - {{ item }}
-{% endif %}
 {% endfor %}
 {% endif %}
 {% if solr_bq is defined %}
-    bq: {{ solr_bq }}
+    bq:
+{% for item in solr_bq %}
+      - {{ item }}
+{% endfor %}
 {% endif %}
     boost: {{ solr_bie_boost_term | default('searchWeight') }}
     defType: {{ solr_deftype | default('edismax') }}
@@ -149,7 +149,7 @@ bie:
   searchPath: {{ bie_search_path | default('/search') }}
 
 geoserverUrl: {{ geoserver_url }}
-regionFeaturedLayerIds: {{ region_featured_layer_ids }}
+regionFeaturedLayerIds: "{{ region_featured_layer_ids }}"
 regionFeaturedLayerFields: {{ region_featured_layer_fields }}
 regionFeaturedLayerIDfield: {{ region_featured_layer_id_field }}
 regionFeaturedLayerSampledField: {{ region_featured_layer_sampled_field }}
