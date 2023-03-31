@@ -208,3 +208,24 @@ survey:
 
 # NBN custom
 additionalMapFilter: {{ additional_map_filter  | to_nice_yaml }}
+
+{% if nbn_region is defined %}
+nbn:
+    region: {{ nbn_region }}
+{% if nbn_inns is defined %}
+    inns: TRUE
+    innsSpeciesCount: {{ nbn_inns_species_count | to_nice_yaml }}
+{% endif %}
+species:
+    additionalHeadlines: {{ species_additional_headlines | to_nice_yaml }}
+    mapResults:{{ species_map_results | to_nice_yaml }}
+{% if nbn_inns is defined %}
+    NNSSlink: {{ species_nnss_link | to_nice_yaml }}
+    listLinks: {{ species_list_links }}
+    mapPresenceAndAbsence: {{ species_map_presence_and_absence }}
+    mapResults: {{ species_map_results }}
+    showNNSSlink: {{ species_show_nnss_link }}
+    tagNNSSlist: {{ species_tag_nnss_list }}
+    tagNNSSlistHTML: {{ species_tag_nnss_list_html | to_nice_yaml }}
+{% endif %}
+{% endif %}
