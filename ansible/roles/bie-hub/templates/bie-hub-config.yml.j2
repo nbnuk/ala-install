@@ -217,8 +217,8 @@ nbn:
     innsSpeciesCount: {{ nbn_inns_species_count | to_nice_yaml }}
 {% endif %}
 species:
-    additionalHeadlines: {{ species_additional_headlines | to_nice_yaml }}
-    mapResults:{{ species_map_results | to_nice_yaml }}
+    additionalHeadlines: {{ species_additional_headlines }}
+    mapResults: {{ species_map_results }}
 {% if nbn_inns is defined %}
     NNSSlink: {{ species_nnss_link | to_nice_yaml }}
     listLinks: {{ species_list_links }}
