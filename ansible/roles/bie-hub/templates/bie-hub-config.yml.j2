@@ -208,3 +208,7 @@ survey:
 
 # NBN custom
 additionalMapFilter: {{ additional_map_filter  | to_nice_yaml }}
+{% if nbn_region is defined %}
+nbn:
+    region: {{ nbn_region }}
+{% endif %}
