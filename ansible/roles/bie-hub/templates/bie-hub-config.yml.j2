@@ -220,7 +220,7 @@ search:
     defaultRows: {{ search_default_rows | default(20) }}
     defaultSortField: {{ search_default_sort_field | default("scientificName") }}
     defaultSortOrder: {{ search_default_sort_order | default("asc") }}
-    showZeroOccurrences: {{ search_show_zero_occurrences | default(TRUE) }}
+    showZeroOccurrences: {{ search_show_zero_occurrences | default("TRUE") }}
 {% if nbn_inns is defined %}
     facetsOnlyShowValues: {{ search_facets_only_show_values }}
     hideFacetsThatDoNotFilterFurther: {{ search_hide_facets_that_do_not_filter_further }}
