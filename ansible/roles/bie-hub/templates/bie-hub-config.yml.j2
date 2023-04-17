@@ -44,6 +44,9 @@ bieService:
 biocacheService:
   baseURL: {{ biocache_service_url }}
   queryContext: {{ biocache_query_context }}
+{% if biocache_service_alt_query_context is defined %}
+  altQueryContext: {{ biocache_service_alt_query_context }}
+{% endif %}
 
 # Header and footer
 headerAndFooter:
