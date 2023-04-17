@@ -213,7 +213,7 @@ additionalMapFilter: {{ additional_map_filter  | to_nice_yaml }}
 nbn:
     region: {{ nbn_region }}
 {% if nbn_inns is defined %}
-    inns: TRUE
+    inns: "true"
     innsSpeciesCount: {{ nbn_inns_species_count | to_nice_yaml }}
 {% endif %}
 {% if nbn_alwaysshowdownloadbutton is defined %}
@@ -226,21 +226,31 @@ search:
     defaultSortOrder: {{ search_default_sort_order | default("asc") }}
     showZeroOccurrences: {{ search_show_zero_occurrences | default("TRUE") }}
 {% if nbn_inns is defined %}
-    facetsOnlyShowValues: {{ search_facets_only_show_values }}
-    hideFacetsThatDoNotFilterFurther: {{ search_hide_facets_that_do_not_filter_further }}
-    includeFreeTextFilterOnResults: {{ search_include_free_text_filter_on_results }}
-    mapPresenceAndAbsence: {{ search_map_presence_and_absence }}
-    mapResults: {{ search_mapResults }}
+    facetsOnlyShowValues: '{{ search_facets_only_show_values }}'
+    hideFacetsThatDoNotFilterFurther: '{{ search_hide_facets_that_do_not_filter_further | lower  }}'
+    includeFreeTextFilterOnResults: '{{ search_include_free_text_filter_on_results | lower  }}'
+    mapPresenceAndAbsence: '{{ search_map_presence_and_absence | lower }}'
+    mapResults: '{{ search_mapResults | lower }}'
+{% if search_view_all is defined %}
+    viewAll: {{ search_view_all }}
+{% endif %}
 {% endif %}
 species:
     additionalHeadlines: {{ species_additional_headlines }}
-    mapResults: "{{ species_map_results }}"
+    mapResults: '{{ species_map_results | lower }}'
 {% if nbn_inns is defined %}
     NNSSlink: {{ species_nnss_link }}
-    listLinks: {{ species_list_links }}
-    mapPresenceAndAbsence: {{ species_map_presence_and_absence }}
-    showNNSSlink: {{ species_show_nnss_link }}
+    listLinks: '{{ species_list_links }}'
+    mapPresenceAndAbsence: '{{ species_map_presence_and_absence | lower }}'
+    showNNSSlink: '{{ species_show_nnss_link | lower }}'
     tagNNSSlist: {{ species_tag_nnss_list }}
     tagNNSSlistHTML: {{ species_tag_nnss_list_html }}
+download:
+{% if download_all_csv is defined %}
+    allcsv: {{ download_all_csv }}
+{% endif %}
+{% if download_all_shp is defined %}
+    allshp: {{ download_all_shp }}
+{% endif %}
 {% endif %}
 {% endif %}
