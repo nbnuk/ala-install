@@ -217,7 +217,7 @@ nbn:
     innsSpeciesCount: {{ nbn_inns_species_count | to_nice_yaml }}
 {% endif %}
 {% if nbn_alwaysshowdownloadbutton is defined %}
-    alwaysshowdownloadbutton: {{ nbn_alwaysshowdownloadbutton }}
+    alwaysshowdownloadbutton: '{{ nbn_alwaysshowdownloadbutton | lower }}'
 {% endif %}
 
 search:
