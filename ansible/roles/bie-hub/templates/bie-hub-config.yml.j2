@@ -229,10 +229,10 @@ search:
     defaultSortOrder: {{ search_default_sort_order | default("asc") }}
     showZeroOccurrences: {{ search_show_zero_occurrences | default("TRUE") }}
 {% if search_tag_if_in_lists is defined %}
-    tagIfInLists: '{{ search_tag_if_in_lists }}'
+    tagIfInLists: {{ search_tag_if_in_lists | to_json }}
 {% endif %}
 {% if nbn_inns is defined %}
-    facetsOnlyShowValues: '{{ search_facets_only_show_values }}'
+    facetsOnlyShowValues: {{ search_facets_only_show_values | to_json }}
     hideFacetsThatDoNotFilterFurther: '{{ search_hide_facets_that_do_not_filter_further | lower  }}'
     includeFreeTextFilterOnResults: '{{ search_include_free_text_filter_on_results | lower  }}'
     mapPresenceAndAbsence: '{{ search_map_presence_and_absence | lower }}'
@@ -251,11 +251,11 @@ search:
 species:
     additionalHeadlines: {{ species_additional_headlines }}
 {% if species_additional_headlines_species_lists is defined %}
-    additionalHeadlinesSpeciesList: '{{ species_additional_headlines_species_lists }}'
+    additionalHeadlinesSpeciesList: {{ species_additional_headlines_species_lists | to_json }}
 {% endif %}
     mapResults: '{{ species_map_results | lower }}'
 {% if species_list_links is defined %}
-    listLinks: '{{ species_list_links }}'
+    listLinks: {{ species_list_links | to_json }}
 {% endif %}
 {% if nbn_inns is defined %}
     NNSSlink: {{ species_nnss_link }}
