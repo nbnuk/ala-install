@@ -242,7 +242,7 @@ search:
 {% endif %}
 {% endif %}
 {% if search_compact_results is defined %}
-    compactResults: {{ search_compact_results }}
+    compactResults: '{{ search_compact_results | lower }}'
     compactResultsGroupBy: {{ search_compact_results_groupby | default("taxonGroup_s") }}
     compactResultsOnlyWhenPageParam: '{{ search_compact_results_only_when_page_param | default("true") }}'
     compactResultsRemoveFacets: '{{ search_compact_results_remove_facets | default("true") }}'
