@@ -157,7 +157,7 @@ map:
     colours: {{ map_layers_colours }}
 
 # NBN added override
-additionalResultsFields: {{ additional_results_fields | default('') }}
+additionalResultsFields: '{{ additional_results_fields | default('') }}'
 
 {% if vernacular_pull_categories is defined %}
 # A category of vernacular names pulled out from the standard list and given special display treatment
@@ -239,6 +239,7 @@ search:
     includeFreeTextFilterOnResults: '{{ search_include_free_text_filter_on_results | lower  }}'
     mapPresenceAndAbsence: '{{ search_map_presence_and_absence | lower }}'
     mapResults: '{{ search_mapResults | lower }}'
+    speciesLimit: {{ search_species_limit | default(400) }}
 {% if search_view_all is defined %}
     viewall: {{ search_view_all }}
 {% endif %}
