@@ -280,9 +280,16 @@
 
     <!-- lowercases the entire field value, keeping it as a single token.  -->
     <fieldType name="lowercase" class="solr.TextField" positionIncrementGap="100">
-      <analyzer>
+      <analyzer type="index">
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.PatternReplaceFilterFactory" pattern="^([a-z]\s+)" replace="all" replacement="ZZZ $1"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+        <filter class="solr.PatternReplaceFilterFactory" pattern="([^\w\d\*æøåÆØÅ ])" replace="all" replacement=""/>
+      </analyzer>
+      <analyzer type="query">
         <tokenizer class="solr.KeywordTokenizerFactory"/>
         <filter class="solr.LowerCaseFilterFactory" />
+        <filter class="solr.PatternReplaceFilterFactory" pattern="([^\w\d\*æøåÆØÅ ])" replace="all" replacement=""/>
       </analyzer>
     </fieldType>
 
