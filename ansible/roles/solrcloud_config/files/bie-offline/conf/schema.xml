@@ -280,9 +280,16 @@
 
     <!-- lowercases the entire field value, keeping it as a single token.  -->
     <fieldType name="lowercase" class="solr.TextField" positionIncrementGap="100">
-      <analyzer>
+      <analyzer type="index">
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.PatternReplaceFilterFactory" pattern="^([a-z]\s+)" replace="all" replacement="ZZZ $1"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+        <filter class="solr.PatternReplaceFilterFactory" pattern="([^\w\d\*æøåÆØÅ ])" replace="all" replacement=""/>
+      </analyzer>
+      <analyzer type="query">
         <tokenizer class="solr.KeywordTokenizerFactory"/>
         <filter class="solr.LowerCaseFilterFactory" />
+        <filter class="solr.PatternReplaceFilterFactory" pattern="([^\w\d\*æøåÆØÅ ])" replace="all" replacement=""/>
       </analyzer>
     </fieldType>
 
@@ -487,6 +494,7 @@
     <!-- NBN additional fields -->
     <field name="synonymComplete" type="name_complete" indexed="true" stored="true" multiValued="true" omitNorms="false" /> <!-- RR 20200114 was string -->
     <field name="speciesCount" type="int" indexed="true" stored="true" multiValued="false" omitNorms="true" />
+    <field name="scientific_name" type="name_complete" indexed="true" stored="false" multiValued="false" omitNorms="true"/>
     <!-- RR Feb 2020 for BBG -->
     <field name="bbg_name_s" type="string" indexed="true" stored="true" multiValued="false" /> <!-- was text RR if not explicitly named, then a string -->
     <field name="point-0.0001" type="string" indexed="true" stored="true" omitNorms="true" />
@@ -550,6 +558,7 @@
   <copyField source="bbg_name_s" dest="bbg_auto_text"/> <!-- KR add to updated suggest -->
 
   <copyField source="scientificName" dest="concat_name"/>
+  <copyField source="scientificName" dest="scientific_name" /> <!-- NBN -->
 
   <copyField source="commonName" dest="concat_name"/>
 

@@ -44,6 +44,9 @@ bieService:
 biocacheService:
   baseURL: {{ biocache_service_url }}
   queryContext: {{ biocache_query_context }}
+{% if biocache_service_alt_query_context is defined %}
+  altQueryContext: {{ biocache_service_alt_query_context }}
+{% endif %}
 
 # Header and footer
 headerAndFooter:
@@ -154,7 +157,7 @@ map:
     colours: {{ map_layers_colours }}
 
 # NBN added override
-additionalResultsFields: {{ additional_results_fields | to_nice_yaml }}
+additionalResultsFields: '{{ additional_results_fields | default('') }}'
 
 {% if vernacular_pull_categories is defined %}
 # A category of vernacular names pulled out from the standard list and given special display treatment
@@ -211,4 +214,63 @@ additionalMapFilter: {{ additional_map_filter  | to_nice_yaml }}
 {% if nbn_region is defined %}
 nbn:
     region: {{ nbn_region }}
+{% if nbn_inns is defined %}
+    inns: "true"
+    innsSpeciesCount: {{ nbn_inns_species_count | to_nice_yaml }}
+{% endif %}
+{% if nbn_alwaysshowdownloadbutton is defined %}
+    alwaysshowdownloadbutton: '{{ nbn_alwaysshowdownloadbutton | lower }}'
+{% endif %}
+
+search:
+    defaultRows: {{ search_default_rows | default(20) }}
+    defaultSortField: {{ search_default_sort_field | default("scientificName") }}
+    defaultSortOrder: {{ search_default_sort_order | default("asc") }}
+    showZeroOccurrences: {{ search_show_zero_occurrences | default("TRUE") }}
+{% if search_tag_if_in_lists is defined %}
+    tagIfInLists: {{ search_tag_if_in_lists | to_json | to_nice_yaml(width=10000) }}
+{% endif %}
+{% if search_facets_only_show_values is defined %}
+    facetsOnlyShowValues: {{ search_facets_only_show_values | to_json | to_nice_yaml(width=10000) }}
+{% endif %}
+{% if nbn_inns is defined %}
+    hideFacetsThatDoNotFilterFurther: '{{ search_hide_facets_that_do_not_filter_further | lower  }}'
+    includeFreeTextFilterOnResults: '{{ search_include_free_text_filter_on_results | lower  }}'
+    mapPresenceAndAbsence: '{{ search_map_presence_and_absence | lower }}'
+    mapResults: '{{ search_mapResults | lower }}'
+    speciesLimit: {{ search_species_limit | default(400) }}
+{% if search_view_all is defined %}
+    viewall: {{ search_view_all }}
+{% endif %}
+{% endif %}
+{% if search_compact_results is defined %}
+    compactResults: '{{ search_compact_results | lower }}'
+    compactResultsGroupBy: {{ search_compact_results_groupby | default("taxonGroup_s") }}
+    compactResultsOnlyWhenPageParam: '{{ search_compact_results_only_when_page_param | default("true") }}'
+    compactResultsRemoveFacets: '{{ search_compact_results_remove_facets | default("true") }}'
+    compactResultsRows: {{ search_compact_results_rows | default(500) }}
+{% endif %}
+species:
+    additionalHeadlines: {{ species_additional_headlines }}
+{% if species_additional_headlines_species_lists is defined %}
+    additionalHeadlinesSpeciesList: {{ species_additional_headlines_species_lists | to_json | to_nice_yaml(width=10000) }}
+{% endif %}
+    mapResults: '{{ species_map_results | lower }}'
+{% if species_list_links is defined %}
+    listLinks: {{ species_list_links | to_json | to_nice_yaml(width=10000) }}
+{% endif %}
+{% if nbn_inns is defined %}
+    NNSSlink: {{ species_nnss_link }}
+    mapPresenceAndAbsence: '{{ species_map_presence_and_absence | lower }}'
+    showNNSSlink: '{{ species_show_nnss_link | lower }}'
+    tagNNSSlist: {{ species_tag_nnss_list }}
+    tagNNSSlistHTML: {{ species_tag_nnss_list_html }}
+download:
+{% if download_all_csv is defined %}
+    allcsv: {{ download_all_csv }}
+{% endif %}
+{% if download_all_shp is defined %}
+    allshp: {{ download_all_shp }}
+{% endif %}
+{% endif %}
 {% endif %}

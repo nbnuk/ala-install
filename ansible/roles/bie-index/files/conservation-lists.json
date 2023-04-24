@@ -1,6 +1,6 @@
 {
   "defaultSourceField": "status",
-  "deleteFirst": "listMembership_m_s,riskAssessment_m_s,riskAssessmentImpact_m_s,managementPlans_m_s,listUktag_m_s",
+  "deleteFirst": ["listMembership_m_s","riskAssessment_m_s","riskAssessmentImpact_m_s","managementPlans_m_s","listUktag_m_s"],
   "lists": [
     {
       "uid": "dr1818",
