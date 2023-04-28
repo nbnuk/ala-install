@@ -26,17 +26,14 @@ SOLR_HEAP="{{ solr_heap | default('512m') }}"
 #SOLR_JAVA_MEM="-Xms512m -Xmx512m"
 
 # Enable verbose GC logging
-GC_LOG_OPTS="-verbose:gc -XX:+PrintHeapAtGC -XX:+PrintGCDetails \
--XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime"
+GC_LOG_OPTS='-Xlog:gc*'
 
 # These GC settings have shown to work well for a number of common Solr workloads
-GC_TUNE="-XX:NewRatio=3 \
--XX:SurvivorRatio=4 \
+GC_TUNE="-XX:SurvivorRatio=4 \
 -XX:TargetSurvivorRatio=90 \
 -XX:MaxTenuringThreshold=8 \
--XX:+UseConcMarkSweepGC \
--XX:+UseParNewGC \
--XX:ConcGCThreads=4 -XX:ParallelGCThreads=4 \
+-XX:ConcGCThreads=4 \
+-XX:ParallelGCThreads=4 \
 -XX:+CMSScavengeBeforeRemark \
 -XX:PretenureSizeThreshold=64m \
 -XX:+UseCMSInitiatingOccupancyOnly \
@@ -87,14 +84,14 @@ ENABLE_REMOTE_JMX_OPTS="false"
 {% endif %}
 
 # Set the thread stack size
-SOLR_OPTS="$SOLR_OPTS -Xss256k"
+#SOLR_OPTS="$SOLR_OPTS -Xss256k"
 
 # Anything you add to the SOLR_OPTS variable will be included in the java
 # start command line as-is, in ADDITION to other options. If you specify the
 # -a option on start script, those options will be appended as well. Examples:
 #SOLR_OPTS="$SOLR_OPTS -Dsolr.autoSoftCommit.maxTime=3000"
 #SOLR_OPTS="$SOLR_OPTS -Dsolr.autoCommit.maxTime=60000"
-#SOLR_OPTS="$SOLR_OPTS -Dsolr.clustering.enabled=true"
+SOLR_OPTS="$SOLR_OPTS -Dsolr.clustering.enabled={{ solr_clustering_enabled | default('false') }}"
 
 {% if solr_bind_jetty_host is defined and solr_bind_jetty_host | bool == true %}
 # Only listen on the defined interface
@@ -105,9 +102,11 @@ SOLR_OPTS="$SOLR_OPTS -Djetty.host=${SOLR_HOST}"
 # turn off config editing for security
 SOLR_OPTS="$SOLR_OPTS -Ddisable.configEdit=true"
 
+SOLR_OPTS="$SOLR_OPTS -Dsolr.environment={{ solr_environment | default('prod,label=Production+Cluster,color=orange') }}"
+
 # Location where the bin/solr script will save PID files for running instances
 # If not set, the script will create PID files in $SOLR_TIP/bin
-#SOLR_PID_DIR=
+SOLR_PID_DIR={{ solr_home | default('/data/solr/data') }}
 
 # Path to a directory for Solr to store cores and their data. By default, Solr will use server/solr
 # If solr.xml is not stored in ZooKeeper, this directory needs to contain solr.xml
