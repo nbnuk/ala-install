@@ -2,4 +2,6 @@
   roles:
     - common
     - java
-    - solr7
+    # this is to allow for toolkit using solr7-standalone
+    - { role: solr7, when: "solr_version is version('7', '=')" }
+    - { role: solr8, when: "solr_version is version('8', '=')" }
