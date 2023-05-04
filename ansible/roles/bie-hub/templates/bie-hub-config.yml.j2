@@ -249,6 +249,8 @@ search:
     compactResultsOnlyWhenPageParam: '{{ search_compact_results_only_when_page_param | default("true") }}'
     compactResultsRemoveFacets: '{{ search_compact_results_remove_facets | default("true") }}'
     compactResultsRows: {{ search_compact_results_rows | default(500) }}
+    compact:
+        headers: {{ search_compact_headers | to_json | to_nice_yaml(width=10000) }}
 {% endif %}
 species:
     additionalHeadlines: {{ species_additional_headlines }}
