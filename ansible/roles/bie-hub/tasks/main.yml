@@ -198,6 +198,16 @@
     - config
     - bie
 
+- name: copy custom data assets
+  copy: src={{item}} dest={{ data_dir }}/{{ bie_hub | default('generic-bie') }}/config
+  with_items:
+    - eol_blacklist.list
+  tags:
+    - webapps
+    - properties
+    - config
+    - bie
+
 - name: copy custom charts nbn
   copy: content="{{ charts_json }}" dest={{ data_dir }}/{{ bie_hub | default('generic-bie') }}/config/charts.json
   when: charts_json is defined
