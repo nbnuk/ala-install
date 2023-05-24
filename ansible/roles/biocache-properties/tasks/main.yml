@@ -44,8 +44,8 @@
     - biocache-properties
 
 # NBN - Customised but not custom file, however not used by default
-- name: copy biocache speciesgroups config
-  copy: src=speciesgroups.json dest={{data_dir}}/biocache/config/speciesgroups.json
+- name: copy biocache speciesGroups config
+  copy: src=speciesGroups.json dest={{data_dir}}/biocache/config/speciesGroups.json
   tags:
     - properties
     - biocache-properties
