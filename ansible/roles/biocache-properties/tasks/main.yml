@@ -43,6 +43,14 @@
     - properties
     - biocache-properties
 
+# NBN - Customised but not custom file, however not used by default
+- name: copy biocache speciesgroups config
+  copy: src=speciesgroups.json dest={{data_dir}}/biocache/config/speciesgroups.json
+  tags:
+    - properties
+    - biocache-properties
+    - nbn
+
 - name: ensure target directories exist [data subdirectories etc.
   file: path={{ item }} state=directory mode=0775
   with_items:
