@@ -4,17 +4,17 @@
     - ebs
 
 - name: Set filesystem
-  command: "mkfs.ext4 /dev/xvdh" 
+  command: "mkfs.ext4 {{ data_volume_name | default('/dev/xvdh') }}"
   tags:
     - ebs
 
 - name: Mount EBS volume
-  command: "mount -t ext4 /dev/xvdh /data" 
+  command: "mount -t ext4 {{ data_volume_name | default('/dev/xvdh') }} /data"
   tags:
     - ebs
 
 - name: Setup mounts on restart
-  mount: name=/data src=/dev/xvdh fstype=ext4 state=present
+  mount: name=/data src="{{ data_volume_name | default('/dev/xvdh') }}" fstype=ext4 state=present
   tags:
     - ebs
     - ebs_mount
