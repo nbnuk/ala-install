@@ -398,6 +398,11 @@
     <fieldType name="quad"      class="solr.SpatialTermQueryPrefixTreeFieldType" distanceUnits="degrees" />
     <fieldType name="geohash"   class="solr.SpatialRecursivePrefixTreeFieldType" spatialContextFactory="org.locationtech.spatial4j.context.jts.JtsSpatialContextFactory" distanceUnits="degrees" />
 
+    <!-- NBN field types -->
+    <fieldType name="geohash_poly" class="solr.SpatialRecursivePrefixTreeFieldType"
+               spatialContextFactory="JTS" distanceUnits="degrees" geo="true" distErrPct="0.15" maxDistErr="0.0007" autoIndex="true"
+               validationRule="repairBuffer0"  />
+    <!-- End NBN field types -->
 </types>
 
 <fields>
@@ -587,7 +592,7 @@
 <field name="sensitive" type="string" indexed="true" stored="true" multiValued="false" omitNorms="true" docValues="true" />
 <field name="assertions" type="string" indexed="true" stored="true" multiValued="true"  docValues="true"/>
 <field name="assertions_passed" type="string" indexed="true" stored="true" multiValued="true"  docValues="true"/>
-<field name="assertions_unchecked" type="string" indexed="true" stored="true" multiValued="true"  docValues="true"/>
+<field name="assertions_unchecked" type="string" indexed="false" stored="false" multiValued="true"  docValues="true"/>
 <field name="assertions_missing" type="string" indexed="true" stored="true" multiValued="true" docValues="true" />
 <field name="user_assertions" type="string" indexed="true" stored="true" multiValued="false" docValues="true" />
 <field name="system_assertions" type="string" indexed="true" stored="true" multiValued="false" docValues="true" />
@@ -624,7 +629,7 @@
 <field name="pest_flag" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
 <field name="occurrence_status_s" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
 <field name="occurrence_status" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
-<field name="occurrence_remarks" type="string" indexed="false" stored="true" multiValued="false" docValues="true"/>
+<field name="occurrence_remarks" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
 <field name="citation" type="string" indexed="false" stored="true" multiValued="false" docValues="true" />
 <field name="license" type="string" indexed="true" stored="true" multiValued="false"  docValues="true"/>
 <!-- I don't think that we need this field - we can always add it later. -->
@@ -686,179 +691,179 @@
 <field name="geohash"  type="geohash"  indexed="true" stored="true"  multiValued="false"/>
 
 <!-- Fields definitions -->
-<field name="abcd_identification_qualifier" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="abcd_identification_qualifier_insertion_point" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="abcd_type_status" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="accepted_name_usage" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="associated_media" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="associated_references" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="associated_sequences" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="associated_taxa" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="aust_conservation" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="australian_herbarium_region" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="abcd_identification_qualifier" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="abcd_identification_qualifier_insertion_point" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="abcd_type_status" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="accepted_name_usage" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="associated_media" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="associated_references" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="associated_sequences" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="associated_taxa" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="aust_conservation" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="australian_herbarium_region" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="bbox" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 <field name="behavior" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="bibliographic_citation" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="bibliographic_citation" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="biome" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="class_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="collection_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="continent" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="coordinate_precision" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="class_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="collection_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="continent" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="coordinate_precision" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="county" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="cultivar_name" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="cultivated" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="data_generalizations" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="dataset_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="cultivar_name" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="cultivated" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="data_generalizations" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="dataset_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="day" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="decimal_latitudelatitude" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="default_values_used" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="depth_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="disposition" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="duplicates_original_institution_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="duplicates_original_unit_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="dynamic_properties" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="elevation_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="elevation_d_rng" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="end_day_of_year" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="event_remarks" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="event_time" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="family_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="field_notes" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="field_number" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="footprint_srs" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="footprint_wkt" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="generalisation_to_apply_in_metres" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="generalised_locality" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="georeference_protocol" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="georeference_remarks" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="georeference_sources" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="georeferenced_by" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="georeferenced_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="geospatial_issue" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="geospatially_kosher" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="decimal_latitudelatitude" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="default_values_used" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="depth_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="disposition" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="duplicates_original_institution_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="duplicates_original_unit_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="dynamic_properties" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="elevation_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="elevation_d_rng" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="end_day_of_year" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="event_remarks" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="event_time" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="family_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="field_notes" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="field_number" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="footprint_srs" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="footprint_wkt" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="generalisation_to_apply_in_metres" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="generalised_locality" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="georeference_protocol" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="georeference_remarks" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="georeference_sources" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="georeferenced_by" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="georeferenced_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="geospatial_issue" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="geospatially_kosher" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="habitat" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="higher_classification" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="higher_geography" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="ibra_subregion" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="identification_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="identification_references" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="identification_remarks" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="identifier_by" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="identifier_role" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="images" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="individual_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="information_withheld" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="infraspecific_epithet" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="institution_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="higher_classification" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="higher_geography" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="ibra_subregion" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="identification_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="identification_references" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="identification_remarks" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="identifier_by" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="identifier_role" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="images" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="individual_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="information_withheld" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="infraspecific_epithet" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="institution_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="island" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="island_group" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="kingdom_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="language" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="last_modified_time" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="last_user_assertion_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="loan_botanist" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="loan_destination" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="loan_identifier" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="loan_number" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="loan_return_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="location_according_to" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="location_determined" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="max_depth_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="max_elevation_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="measurement_accuracy" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="measurement_determined_by" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="measurement_determined_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="measurement_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="measurement_type" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="measurement_unit" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="measurement_value" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="min_depth_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="min_elevation_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="min_elevation_d_rng" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="misc_properties" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="municipality" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="mytest" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="name_according_to" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="name_published_in" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="natural_occurrence" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="near_named_place_relation_to" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="nomenclatural_code" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="nomenclatural_status" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="occurrence_date_end_dt" type="tdate" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="island_group" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="kingdom_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="language" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="last_modified_time" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="last_user_assertion_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="loan_botanist" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="loan_destination" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="loan_identifier" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="loan_number" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="loan_return_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="location_according_to" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="location_determined" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="max_depth_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="max_elevation_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="measurement_accuracy" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="measurement_determined_by" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="measurement_determined_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="measurement_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="measurement_type" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="measurement_unit" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="measurement_value" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="min_depth_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="min_elevation_d" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="min_elevation_d_rng" type="tdouble" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="misc_properties" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="municipality" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="mytest" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="name_according_to" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="name_published_in" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="natural_occurrence" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="near_named_place_relation_to" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="nomenclatural_code" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="nomenclatural_status" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="occurrence_date_end_dt" type="tdate" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="occurrence_decade_i" type="tint" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="order_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="other_catalog_numbers" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="outlier_for_layers" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="owner_institution_code" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="parent_name_usage" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="photo_page_url" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="phylum_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="order_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="other_catalog_numbers" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="outlier_for_layers" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="owner_institution_code" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="parent_name_usage" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="photo_page_url" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="phylum_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="point-0.0001" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 <field name="point-0.001" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 <field name="point-0.01" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 <field name="point-0.02" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 <field name="point-0.1" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 <field name="point-1" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="portal_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="preferred_flag" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="portal_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="preferred_flag" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="preparations" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="previous_identifications" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="quality_assertion" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="query_assertions" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="raw_continent" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="raw_day" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="raw_easting" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="raw_habitat" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="raw_ibra" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="raw_images" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="raw_northing" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="previous_identifications" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="quality_assertion" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="query_assertions" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="raw_continent" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="raw_day" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="raw_easting" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="raw_habitat" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="raw_ibra" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="raw_images" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="raw_northing" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="raw_sampling_protocol" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="raw_sounds" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="raw_subspecies" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="related_resource_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="relationship_of_resource" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="raw_sounds" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="raw_subspecies" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="related_resource_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="relationship_of_resource" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="rightsholder" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="sampling_effort" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="sampling_protocol" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="scientific_name_addendum" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="scientific_name_authorship" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="scientific_name_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="scientific_name_without_author" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="secondary_collectors" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="sounds" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="sampling_effort" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="sampling_protocol" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="scientific_name_addendum" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="scientific_name_authorship" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="scientific_name_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="scientific_name_without_author" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="secondary_collectors" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="sounds" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="specific_epithet" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="start_day_of_year" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="subfamily" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="subgenus" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="subspecies" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="subspecies_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="superfamily" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="taxon_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="taxon_remarks" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="taxonomic_status" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="taxonomically_kosher" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="type" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="type_status_qualifier" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="typified_name" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="user_assertion_status" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="user_quality_assertion" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="user_verified" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="valid_distribution" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="verbatim_coordinate_system" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="verbatim_coordinates" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="verbatim_date_identified" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="verbatim_event_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="verbatim_latitude" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="verbatim_locality" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="verbatim_longitude" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="verbatim_srs" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="verbatim_taxon_rank" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="verification_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="verification_notes" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="start_day_of_year" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="subfamily" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="subgenus" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="subspecies" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="subspecies_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="superfamily" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="taxon_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="taxon_remarks" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="taxonomic_status" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="taxonomically_kosher" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="type" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="type_status_qualifier" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="typified_name" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="user_assertion_status" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="user_quality_assertion" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="user_verified" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="valid_distribution" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="verbatim_coordinate_system" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="verbatim_coordinates" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="verbatim_date_identified" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="verbatim_event_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="verbatim_latitude" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="verbatim_locality" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="verbatim_longitude" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="verbatim_srs" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="verbatim_taxon_rank" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="verification_date" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="verification_notes" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="verifier" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="videos" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="water_body" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
-<field name="zone" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<!--<field name="videos" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="water_body" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<!--<field name="zone" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 
 
 <!-- catchall text field that indexes tokens both normally and in reverse for efficient
@@ -874,7 +879,7 @@
 <dynamicField name="*_m_s"  type="string" multiValued="true"  indexed="true"  stored="true" docValues="true"/>
 <dynamicField name="*_s"  type="string"  indexed="true"  stored="true" docValues="true"/>
 <dynamicField name="*_l"  type="long"   indexed="true"  stored="true" docValues="true"/>
-<dynamicField name="*_t"  type="text"    indexed="true"  stored="true" docValues="true"/>
+<dynamicField name="*_t"  type="string"    indexed="true"  stored="true" docValues="true"/>
 <dynamicField name="*_b"  type="boolean" indexed="true"  stored="true" docValues="true"/>
 <dynamicField name="*_f"  type="float"  indexed="true"  stored="true" docValues="true"/>
 <dynamicField name="*_d"  type="double" indexed="true"  stored="true" docValues="true"/>
@@ -884,12 +889,30 @@
 {% endif %}
 
 {% if dynamic_solr_schema_biocache_el_cl %}
-<dynamicField name="cl*"  type="string"    indexed="true"  stored="true"  docValues="true"/>
-<dynamicField name="el*"  type="double"    indexed="true"  stored="true"  docValues="true"/>
+<dynamicField name="cl*"  type="string"    indexed="true"  stored="true" multiValued="true"  docValues="true"/>
+<dynamicField name="el*"  type="string"    indexed="true"  stored="true"  docValues="true"/>
 {% else %}
 {% endif %}
 
-
+<!-- NBN Custom fields -->
+<field name="geohash_grid"  type="geohash_poly"  indexed="true" stored="true"  multiValued="false" docValues="true"/>
+<field name="grid_ref_50000" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="establishment_means_taxon" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="vitality" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="habitats_taxon" type="string" indexed="true" stored="true" multiValued="true" docValues="true"/>
+<field name="coordinate_uncertainty_category" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="grid_size" type="tint" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="organism_quantity" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="organism_quantity_type" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="organism_scope" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="organism_remarks" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="raw_depth" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="end_day" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="end_month" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="end_year" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="raw_taxon_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true"/>
+<field name="public_resolution_in_meters" type="tint" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<!-- End NBN Custom fields -->
 </fields>
 
     <!-- Field to use to determine and enforce document uniqueness.
@@ -905,8 +928,8 @@
     <!-- Fields needed to be added because of compatibility issue with 1.x version -->
     <copyField source="occurrence_status" dest="occurrence_status_s"/>
     <copyField source="identification_qualifier" dest="identification_qualifier_s"/>
-    <copyField source="elevation_d" dest="elevation_d_rng"/>
-    <copyField source="min_elevation_d" dest="min_elevation_d_rng"/>
+<!--    <copyField source="elevation_d" dest="elevation_d_rng"/>-->
+<!--    <copyField source="min_elevation_d" dest="min_elevation_d_rng"/>-->
 
     <!-- SOLR 4.0 spatial support -->
     <copyField source="lat_long" dest="quad"/>
@@ -966,7 +989,7 @@
     <copyField source="places" dest="geo_regions"/ -->
 
     <copyField source="basis_of_record" dest="text"/>
-    <!--<copyField source="basis_of_record" dest="record_type"/>-->
+    <copyField source="basis_of_record" dest="record_type"/>
     <copyField source="raw_basis_of_record" dest="text" />
     <copyField source="type_status" dest="text" />
     <copyField source="raw_type_status"  dest="text"/>
@@ -983,4 +1006,8 @@
     <copyField source="grid_ref_2000" dest="text"/>
     <copyField source="grid_ref_10000" dest="text"/>
     <copyField source="grid_ref_100000" dest="text"/>
+
+    <!-- NBN Custom/Legacy -->
+    <copyField source="identified_by" dest="identified_by_text"/>
+    <copyField source="taxon_concept_lsid" dest="lsid"/>
 </schema>
