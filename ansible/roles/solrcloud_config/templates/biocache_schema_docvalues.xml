@@ -400,7 +400,7 @@
 
     <!-- NBN field types -->
     <fieldType name="geohash_poly" class="solr.SpatialRecursivePrefixTreeFieldType"
-               spatialContextFactory="JTS" distanceUnits="degrees" geo="true" distErrPct="0.15" maxDistErr="0.0007" autoIndex="true"
+               spatialContextFactory="org.locationtech.spatial4j.context.jts.JtsSpatialContextFactory" distanceUnits="degrees" geo="true" distErrPct="0.15" maxDistErr="0.0007" autoIndex="true"
                validationRule="repairBuffer0"  />
     <!-- End NBN field types -->
 </types>
@@ -895,7 +895,7 @@
 {% endif %}
 
 <!-- NBN Custom fields -->
-<field name="geohash_grid"  type="geohash_poly"  indexed="true" stored="true"  multiValued="false" docValues="true"/>
+<field name="geohash_grid"  type="geohash_poly"  indexed="true" stored="true"  multiValued="false"/>
 <field name="grid_ref_50000" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
 <field name="establishment_means_taxon" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
 <field name="vitality" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
