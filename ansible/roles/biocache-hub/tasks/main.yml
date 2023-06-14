@@ -114,6 +114,15 @@
     - hub_config
     - biocache_hub
 
+- name: copy custom charts nbn
+  copy: content="{{ biocache_charts_json }}" dest={{data_dir}}/{{biocache_hub}}/config/charts.json force=yes
+  when: biocache_charts_json is defined
+  tags:
+    - webapps
+    - properties
+    - config
+    - bie
+
 - name: copy overlays.json
   template: src=config/{{overlays_json}} dest={{data_dir}}/{{biocache_hub}}/config/overlays.json force=yes
   when: overlays_json is defined
