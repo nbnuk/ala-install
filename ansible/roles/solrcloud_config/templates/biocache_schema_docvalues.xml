@@ -606,7 +606,7 @@
 <field name="raw_latitude" type="string" indexed="false" stored="true" multiValued="false"  docValues="true" />
 <field name="raw_longitude" type="string" indexed="false" stored="true" multiValued="false"  docValues="true" />
 <field name="raw_sex" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
-<field name="date_precision" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="date_precision" type="string" indexed="true" stored="true" multiValued="true" docValues="true"/>
 
 <field name="georeference_verification_status" type="string" indexed="true" stored="true" multiValued="false" docValues="true" />
 <field name="identification_verification_status" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
