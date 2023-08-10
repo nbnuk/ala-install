@@ -788,7 +788,7 @@
 <!--<field name="natural_occurrence" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <!--<field name="near_named_place_relation_to" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <!--<field name="nomenclatural_code" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
-<!--<field name="nomenclatural_status" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<field name="nomenclatural_status" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 <!--<field name="occurrence_date_end_dt" type="tdate" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <field name="occurrence_decade_i" type="tint" indexed="true" stored="true" omitNorms="true" docValues="true" />
 <!--<field name="order_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
@@ -826,7 +826,7 @@
 <!--<field name="sampling_effort" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <!--<field name="sampling_protocol" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <!--<field name="scientific_name_addendum" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
-<!--<field name="scientific_name_authorship" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<field name="scientific_name_authorship" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 <!--<field name="scientific_name_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <!--<field name="scientific_name_without_author" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <!--<field name="secondary_collectors" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
@@ -835,7 +835,7 @@
 <!--<field name="start_day_of_year" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <!--<field name="subfamily" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <!--<field name="subgenus" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
-<!--<field name="subspecies" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
+<field name="subspecies" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 <!--<field name="subspecies_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <!--<field name="superfamily" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
 <!--<field name="taxon_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />-->
@@ -911,8 +911,35 @@
 <field name="end_month" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
 <field name="end_year" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
 <field name="raw_taxon_id" type="string" indexed="true" stored="true" omitNorms="true" docValues="true"/>
-<field name="public_resolution_in_meters" type="tint" indexed="true" stored="true" multiValued="false" docValues="true"/>
+
+<!-- Access controls -->
+<field name="public_resolution_in_meters" type="tint" indexed="true" stored="true" multiValued="false"  docValues="true"/>
+<field name="publicresolutiontobeappliedinmeters" type="tint" indexed="true" stored="true" multiValued="false" docValues="true" />
+
+<field name="suppliedaccesscontrolledvalues" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<field name="raw_suppliedaccesscontrolledvalues" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+
+<field name="gridreferencewkt" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<field name="raw_gridreferencewkt" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 <!-- End NBN Custom fields -->
+
+<!-- NBN Additional fields from indexing -->
+<!-- These had equivalent snake case fields to copy from -->
+<field name="abcdidentificationqualifier" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<field name="defaultvaluesused" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<field name="familyid" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<field name="kingdomid" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<field name="locationdetermined" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<field name="orderid" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<field name="phylumid" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+<field name="subspeciesid" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+
+<!-- These had a non-raw version to copy from -->
+<field name="raw_establishment_means" type="string" indexed="true" stored="true" multiValued="true" docValues="true" />
+<field name="raw_order" type="string" indexed="true" stored="true" multiValued="false" docValues="true"/>
+<field name="raw_rank" type="string" indexed="true" stored="true" multiValued="false" docValues="true" />
+<field name="raw_state" type="string" indexed="true" stored="true" multiValued="false" docValues="true" />
+<!-- End Additional fields from indexing  -->
 </fields>
 
     <!-- Field to use to determine and enforce document uniqueness.
