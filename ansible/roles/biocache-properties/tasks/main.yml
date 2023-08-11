@@ -51,6 +51,13 @@
     - biocache-properties
     - nbn
 
+- name: copy biocache indexFields.txt
+  copy: src=indexFields.txt dest={{data_dir}}/biocache/config/indexFields.txt
+  tags:
+    - properties
+    - biocache-properties
+    - nbn
+
 - name: ensure target directories exist [data subdirectories etc.
   file: path={{ item }} state=directory mode=0775
   with_items:
