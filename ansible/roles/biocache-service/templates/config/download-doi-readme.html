@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="{{ header_and_footer_baseurl | default('https://www.ala.org.au/commonui-bs3') }}{{ css_styles | default('/css/ala-styles.css') }}" rel="stylesheet"
+    <link href="https://layout.legacy.nbnatlas.org/uk/commonui-bs3-v2/css/ala-styles.css" rel="stylesheet"
           media="screen,print"/>
     <!--<title>Title</title>-->
-{% if ala_download_css is defined and ala_download_css | bool == True %}
     <style>
         /* The only override we need from ala-styles.css */
 
@@ -30,13 +29,13 @@
         .doi span:first-of-type {
             -webkit-transition: all .3s ease;
             transition: all .3s ease;
-            background: #D5502A ;
+            background: #1e73be;
             /*#09c;*/
             padding: 4px 6px;
             /*border-radius: 5px 0 0 5px;*/
             color: #fff;
             border-right-width: 0;
-            border-color:#D5502A;
+            border-color:#1e73be;
             /*#09c;*/
         }
         .doi span:last-of-type {
@@ -51,9 +50,9 @@
             border: 1px solid #adadad;
         }
         .doi:hover span:first-of-type {
-            background: #D5502A;
+            background: #1e73be;
             /*#004d66; */
-            border-color: #D5502A;
+            border-color: #1e73be;
             /*#004d66;*/
         }
         .doi:hover span:last-of-type {
@@ -61,7 +60,6 @@
         }
 
     </style>
-{% endif %}
 </head>
 <body>
 When using this download please use the following citation: <cite>NBN Atlas occurrence download at https://nbnatlas.org accessed on [date].</cite><br><br>
