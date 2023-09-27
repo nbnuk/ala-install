@@ -742,7 +742,7 @@
 <!--    <field name="associated_references" type="string" indexed="true" stored="true" omitNorms="true" />-->
 <!--    <field name="associated_sequences" type="string" indexed="true" stored="true" omitNorms="true" />-->
 <!--    <field name="associated_taxa" type="string" indexed="true" stored="true" omitNorms="true" />-->
-<!--    <field name="aust_conservation" type="string" indexed="true" stored="true" omitNorms="true" />-->
+    <field name="aust_conservation" type="string" indexed="true" stored="true" omitNorms="true" />
 <!--    <field name="australian_herbarium_region" type="string" indexed="true" stored="true" omitNorms="true" />-->
     <field name="bbox" type="string" indexed="true" stored="true" omitNorms="true" />
     <field name="behavior" type="string" indexed="true" stored="true" omitNorms="true" />
@@ -832,7 +832,7 @@
 <!--    <field name="near_named_place_relation_to" type="string" indexed="true" stored="true" omitNorms="true" />-->
 <!--    <field name="nomenclatural_code" type="string" indexed="true" stored="true" omitNorms="true" />-->
     <field name="nomenclatural_status" type="string" indexed="true" stored="true" omitNorms="true" />
-<!--    <field name="occurrence_date_end_dt" type="tdate" indexed="true" stored="true" omitNorms="true" />-->
+    <field name="occurrence_date_end_dt" type="tdate" indexed="true" stored="true" omitNorms="true" />
     <field name="occurrence_decade_i" type="tint" indexed="true" stored="true" omitNorms="true" />
 <!--    <field name="order_id" type="string" indexed="true" stored="true" omitNorms="true" />-->
 <!--    <field name="other_catalog_numbers" type="string" indexed="true" stored="true" omitNorms="true" />-->
