@@ -76,6 +76,7 @@
     appname: "collectory"
     hostname: "{{ collectory_hostname }}"
     context_path: "{{ collectory_context_path }}"
+    nginx_paths: {{ collectory_nginx_paths | default([]) }} #NBN
   tags:
     - nginx_vhost
     - deploy
