@@ -5,4 +5,7 @@ limit_req_zone {{ nginx_rate_limit_ip_variable }} zone={{ nginx_rate_limit_name 
 limit_req_zone {{ next_other_limit_zone.ip_variable | default(nginx_rate_limit_ip_variable) }} zone={{ next_other_limit_zone.name }}:{{ next_other_limit_zone.size | default(nginx_rate_limit_size) }} rate={{ next_other_limit_zone.rate }};
 {% endfor %}
 {% endif %}
+{% if nginx_rate_limit_dryrun_enabled | bool == True %}
+limit_req_dry_run on;
+{% endif %}
 {% endif %}
