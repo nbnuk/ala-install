@@ -889,7 +889,7 @@
 {% endif %}
 
 {% if dynamic_solr_schema_biocache_el_cl %}
-<dynamicField name="cl*"  type="string"    indexed="true"  stored="true" multiValued="true"  docValues="true"/>
+<dynamicField name="cl*"  type="string"    indexed="true"  stored="true"  docValues="true"/>
 <dynamicField name="el*"  type="string"    indexed="true"  stored="true"  docValues="true"/>
 {% else %}
 {% endif %}
