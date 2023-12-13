@@ -1,8 +1,25 @@
 {% if nginx_rate_limit_enabled | bool == True %}
-limit_req_zone {{ nginx_rate_limit_ip_variable }} zone={{ nginx_rate_limit_name }}:{{ nginx_rate_limit_size }} rate={{ nginx_rate_limit }};
+
+{% if nginx_rate_limit_whitelist  is defined and nginx_rate_limit_whitelist|length > 0 %}
+    {% set nginx_rate_limit_whitelist_variable_token = '$whitelist_filtered_limit' %}
+
+    geo $whilelist {
+    default 0;
+    {% for nginx_rate_limit_whitelist_ip in nginx_rate_limit_whitelist %}
+    {{ nginx_rate_limit_whitelist_ip }} 1;
+    {% endfor %}
+    }
+
+    map $whilelist {{nginx_rate_limit_whitelist_variable_token}} {
+    0 {{ nginx_rate_limit_ip_variable }};
+    1 "";
+    }
+{% endif %}
+
+limit_req_zone {{ nginx_rate_limit_whitelist_variable_token | default(nginx_rate_limit_ip_variable) }} zone={{ nginx_rate_limit_name }}:{{ nginx_rate_limit_size }} rate={{ nginx_rate_limit }};
 {% if nginx_other_limit_zones is defined and nginx_other_limit_zones|length > 0 %}
 {% for next_other_limit_zone in nginx_other_limit_zones %}
-limit_req_zone {{ next_other_limit_zone.ip_variable | default(nginx_rate_limit_ip_variable) }} zone={{ next_other_limit_zone.name }}:{{ next_other_limit_zone.size | default(nginx_rate_limit_size) }} rate={{ next_other_limit_zone.rate }};
+limit_req_zone {{ nginx_rate_limit_whitelist_variable_token | default(next_other_limit_zone.ip_variable) | default(nginx_rate_limit_ip_variable) }} zone={{ next_other_limit_zone.name }}:{{ next_other_limit_zone.size | default(nginx_rate_limit_size) }} rate={{ next_other_limit_zone.rate }};
 {% endfor %}
 {% endif %}
 {% if nginx_rate_limit_dryrun_enabled | default(false) | bool == True %}
