@@ -3,14 +3,14 @@
 {% if nginx_rate_limit_whitelist  is defined and nginx_rate_limit_whitelist|length > 0 %}
     {% set nginx_rate_limit_whitelist_variable_token = '$whitelist_filtered_limit' %}
 
-    geo $whilelist {
+    geo $whitelist {
     default 0;
     {% for nginx_rate_limit_whitelist_ip in nginx_rate_limit_whitelist %}
     {{ nginx_rate_limit_whitelist_ip }} 1;
     {% endfor %}
     }
 
-    map $whilelist {{nginx_rate_limit_whitelist_variable_token}} {
+    map $whitelist {{nginx_rate_limit_whitelist_variable_token}} {
     0 {{ nginx_rate_limit_ip_variable }};
     1 "";
     }
