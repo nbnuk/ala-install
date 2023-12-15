@@ -65,6 +65,9 @@ security:
     bypass: {{ bypass_cas | default(true) }}
     disableCAS: {{ bypass_cas | default(true) }}
     gateway: {{ gateway_cas | default(false) }}
+    enabled: {{ security_cas_enabled | default(false) }}
+  oidc:
+    enabled: {{ security_oidc_enabled | default(true) }}
   apikey:
     check:
       serviceUrl:  {{api_key_check_url_template | default('https://auth.ala.org.au/apikey/ws/check?apikey={0}') }}
