@@ -21,9 +21,9 @@ security:
     bypass: {{ bypass_cas | default(true) }}
     disableCAS: {{ bypass_cas | default(true) }}
     gateway: {{ gateway_cas | default(false) }}
-    enabled: { { security_cas_enabled | default(false) } }
+    enabled: {{ security_cas_enabled | default(false) }}
   oidc:
-    enabled: { { security_oidc_enabled | default(true) } }
+    enabled: {{ security_oidc_enabled | default(true) }}
 
 autocompleteUrl: "{{ bie_service_base_url | default('https://bie-ws.ala.org.au/ws') }}/search/auto.jsonp"
 
