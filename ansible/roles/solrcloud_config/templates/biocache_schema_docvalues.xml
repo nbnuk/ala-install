@@ -395,7 +395,7 @@
     <!-- A specialized field for geospatial search. If indexed, this fieldType must not be multivalued. -->
     <fieldType name="location" class="solr.LatLonPointSpatialField" />
 
-    <fieldType name="quad"      class="solr.SpatialTermQueryPrefixTreeFieldType" distanceUnits="degrees" />
+    <fieldType name="quad" class="solr.SpatialRecursivePrefixTreeFieldType" datelineRule="none" spatialContextFactory="org.locationtech.spatial4j.context.jts.JtsSpatialContextFactory" validationRule="none" distanceUnits="degrees" prefixTree="quad" autoIndex="true" />
     <fieldType name="geohash"   class="solr.SpatialRecursivePrefixTreeFieldType" spatialContextFactory="org.locationtech.spatial4j.context.jts.JtsSpatialContextFactory" distanceUnits="degrees" />
 
     <!-- NBN field types -->
