@@ -199,9 +199,8 @@
     - bie
 
 - name: copy custom data assets
-  copy: src={{item}} dest={{ data_dir }}/{{ bie_hub | default('generic-bie') }}/config
-  with_items:
-    - eol_blacklist.list
+  copy: content={{ eol_blacklist_guids | join('\n') }} dest={{ data_dir }}/{{ bie_hub | default('generic-bie') }}/config/eol_blacklist.list
+  when: eol_blacklist_guids is defined
   tags:
     - webapps
     - properties
