@@ -546,6 +546,7 @@
   <!-- copy fields required for the auto complete -->
   <copyField source="scientificName" dest="auto_text"/>
   <copyField source="commonName" dest="auto_text"/>
+   <copyField source="name" dest="auto_text"/>
 
   <copyField source="name" dest="exact_text"/>
   <copyField source="acronym" dest="exact_text"/>

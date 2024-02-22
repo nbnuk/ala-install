@@ -6,6 +6,14 @@
     "-record_type:PreservedSpecimen^20",
     "data_resource_uid:dr660^500"
   ],
+  "preferred": [
+    "-record_type:PreservedSpecimen"
+  ],
+  "required": [
+    "spatiallyValid:true",
+    "-user_assertions:50001",
+    "-user_assertions:50005"
+  ],
   "ranks": [
     {
       "rank": "phylum",
