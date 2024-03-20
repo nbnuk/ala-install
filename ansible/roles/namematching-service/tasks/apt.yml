@@ -21,7 +21,7 @@
 - name: Install ala-namematching-service version {{ ala_namematching_service_version }}
   apt:
     name:
-      - ala-namematching-service={{ ala_namematching_service_version.split('-NBN')|first }}
+      - ala-namematching-service={{ ala_namematching_service_version }}
     state: present
     autoclean: yes
     update_cache: yes
@@ -44,7 +44,7 @@
 #The following is copied form exec-jar task
 - name: Set if NBN version
   set_fact:
-    namematching_is_nbn: namematching_service_version is defined and namematching_service_version is search("-NBN")
+    namematching_is_nbn: namematching_service_overlay_version is defined
 
 - name: Update apt
   apt:
@@ -73,7 +73,7 @@
   maven_artifact:
     group_id: "{{groupId}}"
     artifact_id: "{{artifactId}}"
-    version: "{{namematching_service_version}}"
+    version: "{{namematching_service_overlay_version}}"
     extension: "{{packaging|default('jar')}}"
     classifier: "{{classifier|default('')}}"
     repository_url: "{{maven_repo_url}}"
