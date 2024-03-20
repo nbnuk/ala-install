@@ -46,13 +46,6 @@
   set_fact:
     namematching_is_nbn: namematching_service_overlay_version is defined
 
-- name: Update apt
-  apt:
-    update_cache: yes
-  when: namematching_is_nbn
-  tags:
-    - service
-
 - name: Install dependencies for ansible python 2
   apt:
     name: python-lxml
