@@ -17,10 +17,11 @@
   tags:
     - apt
 
+# NBN - if NBN version we want to install the underlying ala apt package first
 - name: Install ala-namematching-service version {{ ala_namematching_service_version }}
   apt:
     name:
-      - ala-namematching-service={{ ala_namematching_service_version }}
+      - ala-namematching-service={{ ala_namematching_service_version.split('-NBN')|first }}
     state: present
     autoclean: yes
     update_cache: yes
@@ -39,6 +40,56 @@
   tags:
     - apt
 
+#NBN need to install custom JAR file over the top of version installed by apt - we should look at making our own package
+#The following is copied form exec-jar task
+- name: Set if NBN version
+  set_fact:
+    namematching_is_nbn: namematching_service_version is defined and namematching_service_version is search("-NBN")
+
+- name: Update apt
+  apt:
+    update_cache: yes
+  when: namematching_is_nbn
+  tags:
+    - service
+
+- name: Install dependencies for ansible python 2
+  apt:
+    name: python-lxml
+    state: present
+  when: ansible_python.version.major==2 and namematching_is_nbn
+  tags:
+    - service
+
+- name: Install dependencies for ansible python 3
+  apt:
+    name: python3-lxml
+    state: present
+  when: ansible_python.version.major==3 and namematching_is_nbn
+  tags:
+    - service
+
+- name: "Download ala-namematching-service JAR"
+  maven_artifact:
+    group_id: "{{groupId}}"
+    artifact_id: "{{artifactId}}"
+    version: "{{namematching_service_version}}"
+    extension: "{{packaging|default('jar')}}"
+    classifier: "{{classifier|default('')}}"
+    repository_url: "{{maven_repo_url}}"
+    timeout: 30
+    dest: "/opt/atlas/ala-namematching-service/{{artifactId}}.jar"
+    mode: u=rwx,g=rx,o=rx
+    owner: namematching
+    group: namematching
+    verify_checksum: always
+  notify: "restart ala-namematching-service"
+  when: namematching_is_nbn
+  tags:
+    - namematching-service
+    - deploy
+    - service
+
 - name: Start service ala-namematching-service installed via apt, if not running
   service:
     name: ala-namematching-service
@@ -46,4 +97,4 @@
   tags:
     - apt
   when:
-  - skip_handlers | default("false") | bool == false
+    - skip_handlers | default("false") | bool == false
