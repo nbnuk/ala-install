@@ -241,35 +241,45 @@
 - name: explicitly set use gbif nexus true for nbn artifacts
   set_fact:
     use_gbif_nexus: true
-  when: tomcat_deploy_from_url and (groupId is defined and groupId is match("uk.org.nbn")) or (version is defined and version is search("-NBN"))
+  when:
+    - tomcat_deploy_from_url | default(false)
+    - (groupId is defined and groupId is match("uk.org.nbn")) or (version is defined and version is search("-NBN"))
   tags:
     - setfacts
 
 - name: explicitly set use gbif nexus false for ala artifacts
   set_fact:
     use_gbif_nexus: false
-  when: tomcat_deploy_from_url and (groupId is defined and groupId is not match("uk.org.nbn")) and (version is defined and version is not search("-NBN"))
+  when:
+    - tomcat_deploy_from_url | default(false)
+    - (groupId is defined and groupId is not match("uk.org.nbn")) and (version is defined and version is not search("-NBN"))
   tags:
     - setfacts
 
 - name: explicitly set release directory for nbn snapshots
   set_fact:
     maven_release_dir: "uk-nbn-snapshots"
-  when: tomcat_deploy_from_url and ((groupId is defined and groupId is match("uk.org.nbn")) or (version is defined and version is search("-NBN"))) and version is search("-SNAPSHOT")
+  when:
+    - tomcat_deploy_from_url | default(false)
+    - ((groupId is defined and groupId is match("uk.org.nbn")) or (version is defined and version is search("-NBN"))) and version is search("-SNAPSHOT")
   tags:
     - setfacts
 
 - name: explicitly set release directory for nbn releases
   set_fact:
     maven_release_dir: "uk-nbn-releases"
-  when: tomcat_deploy_from_url and ((groupId is defined and groupId is match("uk.org.nbn")) or (version is defined and version is search("-NBN"))) and version is not search("-SNAPSHOT")
+  when:
+    - tomcat_deploy_from_url | default(false)
+    - ((groupId is defined and groupId is match("uk.org.nbn")) or (version is defined and version is search("-NBN"))) and version is not search("-SNAPSHOT")
   tags:
     - setfacts
 
 - name: explicitly set release directory for ala releases
   set_fact:
     maven_release_dir: "public"
-  when: tomcat_deploy_from_url and maven_release_dir is defined and groupId is defined and groupId is not match("uk.org.nbn") and version is defined and version is not search("-NBN")
+  when:
+    - tomcat_deploy_from_url | default(false)
+    - maven_release_dir is defined and groupId is defined and groupId is not match("uk.org.nbn") and version is defined and version is not search("-NBN")
   tags:
     - setfacts
 
