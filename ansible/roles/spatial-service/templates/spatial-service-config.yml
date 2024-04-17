@@ -206,19 +206,21 @@ security:
   oidc:
     enabled: {{ oidc_enabled }}
     discoveryUri: {{oidc_discoveryUri}}
-    clientId: {{ spatial_service_oidc_client_id }}
-    secret: {{ spatial_service_oidc_secret }}
+    clientId: {{ (spatial_service_oidc_client_id | default(clientId)) | default('') }}
+    secret: {{ (spatial_service_oidc_secret | default(secret)) | default('') }}
     allowUnsignedIdTokens: true
     scope: 'openid profile email ala/attrs ala/roles'
     roleAttribute: ala:role
-    logoutAction: cognito
     alaUseridClaim: username
-    logoutUrl: {{ oidc_logoutUrl }}
+{% if logout_action is defined and logout_action == 'cognito' %}
+    logoutUrl: {{ cognito_logout_url | default('') }}
+    logoutAction: cognito
+{% endif %}
   jwt:
-    enabled: {{ jwt_enabled }}
+    enabled: {{ jwt_enabled | default('false') }}
     discoveryUri: {{ jwt_discoveryUri }}
     fallbackToLegacyBehaviour: true
-    clientId: {{ spatial_service_oidc_client_id }}
+    clientId: {{ (spatial_service_oidc_client_id | default(jwt_client_id) | default(clientId)) | default('') }}
     roleAttributes: cognito:groups
     rolesFromAccessToken: true
     userIdClaim: username
@@ -242,8 +244,8 @@ security:
 #webservice:
 #  jwt: true
 #  jwt-scopes: ala/attrs ala/internal users/read
-#  clientId: {{ spatial_service_webservice_client_id }}
-#  secret: {{ spatial_service_webservice_client_secret }}
+#  clientId: {{ spatial_service_webservice_client_id | default('')}}
+#  secret: {{ spatial_service_webservice_client_secret | default('') }}
 
 #used for spatial-service only
 apiKeyCheckUrlTemplate:  {{api_key_check_url_template | default('https://auth.ala.org.au/apikey/ws/check?apikey={0}') }}
