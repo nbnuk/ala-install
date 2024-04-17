@@ -13,6 +13,7 @@ security:
     domain: {{ auth_cookie_domain | default('.ala.org.au') }}
   cas:
     enabled: {{ userdetails_use_cas | default('true') }}
+    authenticateOnlyIfLoggedInFilterPattern : {{ userdetails_authenticate_only_if_logged_in_filter_pattern | default('') }}
 {% if userdetails_use_cas | default('true') %}
     casServerName: {{ cas_server_name }}
     casServerUrlPrefix: ${security.cas.casServerName}/{{ cas_context_path | default('cas') }}
@@ -301,3 +302,15 @@ userdetails.web.url: {{ userdetails_web_url | default('https://auth.ala.org.au/u
 userdetails.api.url: {{ userdetails_api_url | default('https://api.ala.org.au/userdetails/') }}
 
 userdetails.api.useGatewayAPI: {{ userdetails_api_useGatewayAPI | default('false') }}
+
+{% if userdetails_backend == 'gorm' %}
+applications:
+  mongo:
+    uri: {{ cas_services_uri | default('') }}
+    auth-db: {{ cas_services_auth_db | default('') }}
+    username: {{ cas_services_username | default('cas') }}
+    password: {{ cas_services_password | default('password') }}
+    database: {{ cas_services_db | default('cas-service-registry') }}
+    collection: {{ cas_services_collection | default('services') }}
+
+{% endif %}
