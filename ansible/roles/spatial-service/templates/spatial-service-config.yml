@@ -199,6 +199,7 @@ security:
     disableCAS: {{ bypass_cas | default(true) }}
     gateway: {{ gateway_cas | default(false) }}
     enabled: {{ cas_enabled | default(false) }}
+    appServerName: {{ spatial_service_base_url }}
   apikey:
     check:
       serviceUrl:  {{api_key_service_url | default('https://auth.ala.org.au/apikey/ws/check?apikey=') }}
