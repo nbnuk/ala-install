@@ -148,11 +148,6 @@ localityKeywordsUrl: file://{{ data_dir }}/bie-index/config/locality-keywords.js
 #nationalSpeciesDatasets: dr2699,dr2700,dr2702,dr2704,dr2703,dr3118
 nationalSpeciesDatasets: ""
 
-#nbn - conditional override added
-{% if default_download_fields is defined %}
-defaultDownloadFields: {{ default_download_fields }}
-{% endif %}
-
 additionalResultFields: {{ additional_results_fields | default('""') }}
 
 hiddenImages:
@@ -245,7 +240,7 @@ userdetails.web.url: {{ userdetails_web_url | default('https://auth.ala.org.au/u
 userdetails.api.url: {{ userdetails_api_url | default('https://api.ala.org.au/userdetails/') }}
 
 # all available rk_ and rkid_ fields in SOLR are added to defaultDownloadFields when no rk_ field is defined in defaultDownloadFields
-defaultDownloadFields: guid,rank,scientificName,scientificNameAuthorship,taxonomicStatus,establishmentMeans,datasetName,parentGuid,acceptedConceptName,acceptedConceptID,idxtype,name,additionalNames_m_s
+defaultDownloadFields: {{ default_download_fields | default('guid,rank,scientificName,scientificNameAuthorship,taxonomicStatus,establishmentMeans,datasetName,parentGuid,acceptedConceptName,acceptedConceptID,idxtype,name,additionalNames_m_s') }}
 downloadMaxRows: 100000
 
 # override the taxon ranks taxonRanksFile with an external file
