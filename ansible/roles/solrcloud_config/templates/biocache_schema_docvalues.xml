@@ -396,7 +396,7 @@
     <fieldType name="location" class="solr.LatLonPointSpatialField" />
 
     <fieldType name="quad" class="solr.SpatialRecursivePrefixTreeFieldType" datelineRule="none" spatialContextFactory="org.locationtech.spatial4j.context.jts.JtsSpatialContextFactory" validationRule="none" distanceUnits="degrees" prefixTree="quad" autoIndex="true" />
-    <fieldType name="geohash"   class="solr.SpatialRecursivePrefixTreeFieldType" spatialContextFactory="org.locationtech.spatial4j.context.jts.JtsSpatialContextFactory" distanceUnits="degrees" />
+    <fieldType name="geohash"   class="solr.SpatialRecursivePrefixTreeFieldType" datelineRule="none" spatialContextFactory="org.locationtech.spatial4j.context.jts.JtsSpatialContextFactory" validationRule="none" distanceUnits="degrees" autoIndex="true" />
 
     <!-- NBN field types -->
     <fieldType name="geohash_poly" class="solr.SpatialRecursivePrefixTreeFieldType"
