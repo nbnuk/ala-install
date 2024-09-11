@@ -449,8 +449,19 @@
     group: root
     mode: 644
   with_items:
-    - "facets.json"
     - "pipelines-field-config.json"
+  tags:
+    - biocache-service
+    - properties
+
+# NBN added override
+- name: copy biocache facets config
+  copy:
+    src: "config/{{ facets_json_biocache | default('facets.json') }}"
+    dest: "{{ data_dir }}/biocache/config/facets.json"
+    owner: root
+    group: root
+    mode: 644
   tags:
     - biocache-service
     - properties
