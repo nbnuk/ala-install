@@ -1,5 +1,5 @@
 ---
-- include: ../../common/tasks/setfacts.yml
+- include_tasks: ../../common/tasks/setfacts.yml
   tags:
     - namematching-service
     - deploy
@@ -54,6 +54,7 @@
     - restart ala-namematching-service
   tags:
     - properties
+    - properties-file
     - namematching-service
 
 - name: Customize species group files

@@ -1,4 +1,4 @@
-- include: ../../common/tasks/setfacts.yml
+- include_tasks: ../../common/tasks/setfacts.yml
   tags:
     - volunteer-portal
     - deploy
@@ -14,6 +14,7 @@
   vars:
     service_name: "digivol"
     jar_url: '{{ digivol_jar_url }}'
+    log_config_filename: logback.xml
   tags:
     - deploy
     - volunteer-portal
@@ -26,6 +27,7 @@
   file: path={{item}} state=directory owner=digivol group=digivol
   with_items:
     - "{{data_dir}}/volunteer-portal"
+    - "{{data_dir}}/volunteer-portal/config"
     - "{{data_dir}}/digivol"
     - "{{data_dir}}/digivol/config"
     - "{{data_dir}}/volunteer/elasticsearch"
@@ -47,8 +49,8 @@
 
 - name: copy logback config
   template:
-    src: logback.groovy
-    dest: "{{data_dir}}/volunteer-portal/config/logback.groovy"
+    src: logback.xml
+    dest: "{{data_dir}}/volunteer-portal/config/logback.xml"
     owner: digivol
     group: digivol
   notify:

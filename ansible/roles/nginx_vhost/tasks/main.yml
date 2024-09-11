@@ -526,7 +526,7 @@
 - name: symlink vhost to sites-enabled
   file:
     state: link
-    src: "{{nginx_conf_dir}}/sites-available/{{hostname}}{{vfragments_suffix}}.conf"
+    src: "../sites-available/{{hostname}}{{vfragments_suffix}}.conf"
     dest: "{{nginx_conf_dir}}/sites-enabled/{{hostname}}{{vfragments_suffix}}.conf"
   when: vhost_required | bool == True
   notify:
@@ -540,11 +540,9 @@
     - nginx_vhost
 
 - name: "Default host"
-  include: "defaulthost.yml"
+  include_tasks: "defaulthost.yml"
   when:
     - ( aws_elb_healthcheck_default | bool == True or nginx_default_vhost_required | bool == True ) and vhost_required | bool == True
-  notify:
-   - reload nginx
   tags:
     - nginx_vhost
 
