@@ -68,8 +68,9 @@ conservation:
       field: dwc:country
     - action: clear
       field: dwc:locationRemarks
-    - action: clear
-      field: gridReference
+# NBN removed - by default sds qualifies this with unknown.org as the term isn't present but we've qualified it in pipelines
+#    - action: clear
+#      field: gridReference
     - action: clear
       field: footprintWKT
     - action: add
@@ -121,3 +122,9 @@ conservation:
       field: dwc:infraspecificEpithet
     - action: retain
       field: intraspecificEpithet
+      # NBN additions
+    - action: clear
+      field: dwc:verbatimElevation
+    - action: clear
+      field: dwc:verbatimDepth
+      # NBN addition end
