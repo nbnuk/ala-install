@@ -134,7 +134,8 @@
     - solr_create_collection
   when: collection.status == 404
 
-- import_role:
+# Switch to include_role from import_role is a temporary patch to prevent vars being applied within this playbook
+- include_role:
     name: solrcloud_config
   vars:
     - solr_config_host: 127.0.0.1
