@@ -277,6 +277,9 @@ nbn:
 {% if nbn_alwaysshowdownloadbutton is defined %}
     alwaysshowdownloadbutton: '{{ nbn_alwaysshowdownloadbutton | lower }}'
 {% endif %}
+{% if nbn_country_biodiversity_lists is defined %}
+    countryBiodiversityLists: '{{ nbn_country_biodiversity_lists }}'
+{% endif %}
 
 search:
     defaultRows: {{ search_default_rows | default(20) }}
