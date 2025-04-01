@@ -2,13 +2,13 @@
     "title": "Taxon",
     "facets": [{
         "sort": "count",
-        "field": "taxon_name"
+        "field": "scientificName"
     }, {
         "sort": "count",
-        "field": "raw_taxon_name"
+        "field": "raw_scientificName"
     }, {
         "sort": "count",
-        "field": "subspecies_name"
+        "field": "subspecies"
     }, {
         "sort": "count",
         "field": "species"
@@ -35,19 +35,19 @@
         "field": "rank"
     }, {
         "sort": "count",
-        "field": "name_match_metric"
+        "field": "matchType"
     }, {
         "sort": "index",
-        "field": "species_group"
+        "field": "speciesGroup"
     }, {
         "sort": "index",
-        "field": "common_name"
+        "field": "vernacularName"
     }, {
         "sort": "count",
-        "field": "species_subgroup"
+        "field": "speciesSubgroup"
     }, {
         "sort": "index",
-        "field": "species_list_uid"
+        "field": "speciesListUid"
 
     }, {
         "sort": "count",
@@ -60,34 +60,34 @@
         "field": "license"
     },{
         "sort": "count",
-        "field": "alau_user_id"
+        "field": "userId"
     }, {
         "sort": "count",
-        "field": "data_provider_uid"
+        "field": "dataProviderUid"
     }, {
         "sort": "count",
-        "field": "data_resource_uid"
+        "field": "dataResourceUid"
     }]
 },{
     "title": "Identification",
     "facets": [{
         "sort": "index",
-        "field": "identified_by"
+        "field": "identifiedBy"
     }, {
         "sort": "index",
-        "field": "raw_identification_qualifier"
+        "field": "identificationQualifier"
     }, {
         "sort": "count",
-        "field": "taxonomic_issue"
+        "field": "taxonomicIssues"
     }, {
         "sort": "index",
-        "field": "type_status"
+        "field": "typeStatus"
     }, {
         "sort": "index",
-        "field": "original_name_usage"
+        "field": "originalNameUsage"
     }, {
         "sort": "index",
-        "field": "identification_verification_status"
+        "field": "identificationVerificationStatus"
     }]
 }, {
     "title": "Location",
@@ -104,26 +104,17 @@
         "sort": "index",
         "field": "cl28"
     },{
-        "sort": "index",
-        "field": "elevation_d_rng"
-    }, {
-        "sort": "index",
-        "field": "min_elevation_d_rng"
-    }, {
         "sort": "count",
         "field": "sensitive"
     }, {
-        "sort": "count",
-        "field": "species_habitats"
-    }, {
         "sort": "index",
-        "field": "grid_size"
+        "field": "gridSizeInMeters"
     }, {
         "sort": "count",
-        "field": "geospatial_kosher"
+        "field": "spatiallyValid"
     }, {
         "sort": "index",
-        "field": "location_id"
+        "field": "locationID"
     }]
 }, {
     "title": "Occurrence",
@@ -135,7 +126,7 @@
         "field": "raw_sex"
     }, {
         "sort": "count",
-        "field": "establishment_means"
+        "field": "establishmentMeans"
     }, {
         "sort": "index",
         "field": "month"
@@ -144,10 +135,10 @@
         "field": "year"
     }, {
         "sort": "count",
-        "field": "occurrence_decade_i"
+        "field": "decade"
     }, {
         "sort": "count",
-        "field": "date_precision"
+        "field": "datePrecision"
     }, {
         "sort": "count",
         "field": "vitality"
@@ -156,13 +147,13 @@
     "title": "Record",
     "facets": [{
         "sort": "index",
-        "field": "basis_of_record"
+        "field": "basisOfRecord"
     }, {
         "sort": "count",
         "field": "multimedia"
     }, {
         "sort": "index",
-        "field": "occurrence_status"
+        "field": "occurrenceStatus"
     }]
 }, {
     "title": "Assertions",
@@ -171,15 +162,15 @@
         "field": "assertions"
     }, {
         "sort": "count",
-        "field": "user_assertions"
+        "field": "userAssertions"
     }, {
         "sort": "index",
-        "field": "assertion_user_id"
+        "field": "assertionUserId"
     }, {
         "sort": "count",
-        "field": "duplicate_status"
+        "field": "duplicateStatus"
     }, {
         "sort": "count",
-        "field": "duplicate_type"
+        "field": "duplicateType"
     }]
 }]
