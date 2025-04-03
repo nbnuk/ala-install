@@ -403,6 +403,7 @@
     hour: "3"
     minute: "35"
     job: "find {{ download_dir | default('/data/biocache-download') }} -type d -mtime +30 -exec rm -rf {} \\;"
+    state: "{{ downloads_biocache_purge_enabled | default(true) | bool | ternary('present', 'absent') }}"
   tags:
     - biocache-service
     - properties
