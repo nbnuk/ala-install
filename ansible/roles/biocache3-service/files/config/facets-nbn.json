@@ -49,18 +49,12 @@
         "sort": "index",
         "field": "speciesListUid"
 
-    }, {
-        "sort": "count",
-        "field": "interaction"
     }]
 }, {
     "title": "Attribution",
     "facets": [{
         "sort": "count",
         "field": "license"
-    },{
-        "sort": "count",
-        "field": "userId"
     }, {
         "sort": "count",
         "field": "dataProviderUid"
