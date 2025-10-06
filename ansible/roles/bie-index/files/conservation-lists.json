@@ -186,6 +186,20 @@
       "action": "add",
       "term": "UKTAG 2015 ALIEN SPECIES ALARM LIST",
       "label": ""
+    },
+    { "uid": "dr2111",
+      "sourceField": "Designation",
+      "field": "gbRedListStatus_m_s",
+      "action": "add",
+      "term": " Red List GB Post 2001",
+      "label": "Red List"
+    },
+    { "uid": "dr3494",
+      "sourceField": "Designation",
+      "field": "gbRareAndScarceStatus_m_s",
+      "action": "add",
+      "term": "Nationally Rare and Scarce list",
+      "label": "Rare and Scarce"
     }
   ]
 }
