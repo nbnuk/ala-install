@@ -1,17 +1,23 @@
-- include: ../../common/tasks/setfacts.yml 
+- include_tasks: ../../common/tasks/setfacts.yml
 
 
 - name: "Show java version"
   debug:
-    msg: "Using java versions: java8={{ use_openjdk8 }} java11={{ use_openjdk11 }}'"
+    msg: "Using java versions: java8={{ use_openjdk8 }} java11={{ use_openjdk11 }} java17={{ use_openjdk17 }}'"
   tags:
     - java
 
-- include: openjdk-java-8.yml
+- include_tasks: openjdk-java-8.yml
   when: use_openjdk8 is defined and use_openjdk8 | bool == True
 
-- include: zulu-8.yml
+- include_tasks: zulu-8.yml
   when: use_zulu8 is defined and use_zulu8 | bool == True
 
-- include: openjdk-java-11.yml
+- include_tasks: openjdk-java-11.yml
   when: use_openjdk11 is defined and use_openjdk11 | bool == True
+
+- include_tasks: openjdk-java-17.yml
+  when: use_openjdk17 is defined and use_openjdk17 | bool == True
+
+- include_tasks: openjdk-java-21.yml
+  when: use_openjdk21 is defined and use_openjdk21 | bool == True

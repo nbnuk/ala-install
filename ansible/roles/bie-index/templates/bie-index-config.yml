@@ -40,7 +40,7 @@ security:
 {% endif %}
   jwt:
     discoveryUri: {{ discoveryUri | default('') }}
-    clientId: {{ (bie_index_clientId | default(clientId)) | default('') }}
+    clientId: {{ (bie_index_client_id | default(clientId)) | default('') }}
 # cognito specific configs
 {% if auth_system is defined and auth_system == 'cognito' %}
     rolesFromAccessToken: {{ rolesFromAccessToken | default('true') }}
@@ -56,13 +56,15 @@ security:
       serviceUrl: {{ apikey_check_url | default('https://auth.ala.org.au/apikey/ws/check?apikey=') }}
     userdetails:
       serviceUrl: {{ apikey_userdetails_url }}
+    # still present in alaAdmin/viewConfig so let's configure properly
+    serviceUrl: {{ apikey_auth_url }}
 webservice:
   jwt: {{ webservice_jwt | default('false') }}
-  jwt-scopes: {{ webservice_jwt_scopes | default('') }}
-  client-id: {{ webservice_clientId | default('') }}
-  client-secret: {{ webservice_secert | default('') }}
+  jwt-scopes: {{ bie_index_webservice_jwt_scopes | default(webservice_jwt_scopes) | default('') }}
+  client-id: {{ bie_index_client_id | default(webservice_clientId) | default('') }}
+  client-secret: {{ bie_index_client_secret | default(webservice_secert) | default('') }}
 userDetails:
-  url: {{ userdetails_url | default('https://auth.ala.org.au/userdetails/') }}
+  url: {{ bie_userdetails_url | default(userdetails_url) | default('https://auth.ala.org.au/userdetails/') }}
 biocache:
   base: {{ biocache_base_url | default('https://biocache.ala.org.au') }}
   service: {{ biocache_service_url | default('https://biocache-ws.ala.org.au/ws') }}
@@ -107,10 +109,10 @@ lists:
   useListWs: true
   service: {{ specieslist_service_url | default('https://lists-ws.ala.org.au') }}
   ui: {{ specieslist_url | default('https://lists.ala.org.au') }}
-  items: /speciesListItems/{0}?pageSize={1}&page={2}
-  search: /speciesList/?isAuthoritative=true&pageSize={0}&page={1}
-  conservation: /speciesList/?isAuthoritative=true&isThreatened=true&pageSize={0}&page={1}
-  show: /#/list/{0}
+  items: /v2/speciesListItems/{0}?pageSize={1}&page={2}
+  search: /v2/speciesList?isAuthoritative=true&pageSize={0}&page={1}
+  conservation: /v2/speciesList?isAuthoritative=true&isThreatened=true&pageSize={0}&page={1}
+  show: /list/{0}
 {% else %}
   useListWs: false
   service: {{ specieslist_service_url | default('https://lists.ala.org.au/ws') }}
@@ -121,6 +123,7 @@ lists:
   ui: {{ specieslist_url | default('https://lists.ala.org.au') }}
   conservation: /speciesList?isAuthoritative=eq:true&isThreatened=eq:true&max={0}&offset={1}
   search: /speciesList/?isAuthoritative=eq:true&max={0}&offset={1}
+  items: /speciesListItems/{0}?max={1}&offset={2}&includeKVP=true
   show: /speciesListItem/list/{0}
   add: /createItem
   remove: /deleteItem
@@ -235,7 +238,7 @@ openapi:
 {% endif %}
 
 userdetails:
-  url: {{ userdetails_url | default('https://auth.ala.org.au/userdetails') }}
+  url: {{ bie_userdetails_url | default(userdetails_url) | default('https://auth.ala.org.au/userdetails') }}
 userdetails.web.url: {{ userdetails_web_url | default('https://auth.ala.org.au/userdetails/') }}
 userdetails.api.url: {{ userdetails_api_url | default('https://api.ala.org.au/userdetails/') }}
 

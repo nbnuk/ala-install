@@ -44,6 +44,7 @@
     - restart cas-management
   tags:
     - properties
+    - properties-file
     - cas-management
 
 - name: copy application.yml
@@ -90,7 +91,7 @@
     - nginx_vhost
     - deploy
     - cas-management
-  when: webserver_nginx
+  when: webserver_nginx | bool 
 
 - name: Include docker tasks
   include_tasks: docker-tasks.yml

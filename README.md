@@ -4,7 +4,7 @@ This project includes a playbook for setting up an ALA demo.
 
 ## Prerequisites
 
-### Ansible: The current supported version is: **2.10.3**
+### Ansible: The current supported version is: **2.17.3** (core) and **10.3.0** (community)
 
 The playbooks and roles in this repository have been developed and tested against the above version. Typically you need to install ansible in your computer or in the computer you'll use to deploy from.
 
@@ -15,19 +15,29 @@ For APT:
 ```
 $ sudo apt-get install software-properties-common python-dev git python-pip
 $ sudo pip install setuptools
-$ sudo pip install -I ansible==[version]
+$ sudo pip install -I ansible==[community-version] ansible-core==[core-version]
 ```
 
-where ```[version]``` is the supported version listed above.
+also
+```
+pipx install ansible==[community-version] ansible-core==[core-version]
+```
+
+for instance:
+
+```
+pipx install ansible==10.3.0 ansible-core==2.17.3
+```
+
+where ```[community-version]``` and ```[core-version]``` are the supported versions listed above.
 
 For OSX:
 
 ```
 $ sudo easy_install pip
-$ sudo pip install -I ansible==[version]
+$ sudo pip install -I ansible==[community-version] ansible-core==[core-version]
 ```
-
-where ```[version]``` is the supported version listed above.
+where ```[community-version]``` and ```[core-version]``` are the supported versions listed above. You'll need also python >= `3.10`.
 
 If you see this error:
 ```
@@ -37,7 +47,7 @@ then you have an older version of Ansible.
 
 ### Operating System
 
-These playbooks and roles are currently well tested on Ubuntu `18.04`. We are also starting to use Ubuntu `20.04` but it's a work in progress. We have less tested other distributions like Redhat or even Debian as the big majority of our production deployments run over Ubuntu.
+These playbooks and roles are currently well tested on Ubuntu `20.04`. We are also starting to use Ubuntu `20.04` but it's a work in progress. We have less tested other distributions like Redhat or even Debian as the big majority of our production deployments run over Ubuntu.
 
 ## Setup a Living Atlas
 

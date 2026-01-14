@@ -1,4 +1,4 @@
-- include: ../../common/tasks/setfacts.yml
+- include_tasks: ../../common/tasks/setfacts.yml
   tags:
     - moths
 
@@ -30,4 +30,4 @@
     - nginx_vhost
     - deploy
     - moths
-  when: webserver_nginx
+  when: webserver_nginx | bool 

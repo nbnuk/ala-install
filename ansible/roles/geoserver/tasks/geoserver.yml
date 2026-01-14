@@ -1,4 +1,4 @@
-- include: ../../common/tasks/setfacts.yml
+- include_tasks: ../../common/tasks/setfacts.yml
   tags:
     - geoserver
     - geoserver_run_script
@@ -27,7 +27,7 @@
   blockinfile:
     path={{tomcat_conf}}
     marker="# {mark} Configure Geoserver/GWC data folder / (Ansible managed)"
-    block='JAVA_OPTS="${JAVA_OPTS} -DGEOSERVER_DATA_DIR={{data_dir}}/geoserver_data_dir -DGEOWEBCACHE_CACHE_DIR={{data_dir}}/geoserver_data_dir/gwc"'
+    block='JAVA_OPTS="${JAVA_OPTS} -DGEOSERVER_CSRF_WHITELIST={{ geoserver_hostname }} -DGEOSERVER_DATA_DIR={{data_dir}}/geoserver_data_dir -DGEOWEBCACHE_CACHE_DIR={{data_dir}}/geoserver_data_dir/gwc"'
     backup=yes
   notify:
     - restart tomcat
@@ -42,7 +42,10 @@
   register: geoserver_data_dir_check
   check_mode: no
 
-- include: ../../apache_vhost/tasks/main.yml context_path='{{ geoserver_context_path }}' hostname='{{ geoserver_hostname }}'
+- include_tasks: ../../apache_vhost/tasks/main.yml
+  vars:
+    context_path: '{{ geoserver_context_path }}'
+    hostname: '{{ geoserver_hostname }}'
   tags:
     - deploy
     - apache_vhost
@@ -60,9 +63,13 @@
     - nginx_vhost
     - deploy
     - geoserver
-  when: webserver_nginx
+  when: webserver_nginx | bool 
 
-- include: ../../tomcat_deploy/tasks/main.yml war_url='{{ geoserver_war_url }}' context_path='{{ geoserver_context_path }}' hostname='{{ geoserver_hostname }}'
+- include_tasks: ../../tomcat_deploy/tasks/main.yml
+  vars:
+    war_url: '{{ geoserver_war_url }}'
+    context_path: '{{ geoserver_context_path }}'
+    hostname: '{{ geoserver_hostname }}'
   tags:
     - deploy
     - tomcat_vhost
@@ -78,7 +85,7 @@
   tags:
     - geoserver
 
-- name: remove previous geoserver data dir
+- name: remove previous /tmp/geoserver_data_dir
   command: "rm -r /tmp/geoserver_data_dir"
   ignore_errors: yes
   when: not geoserver_data_dir_check.stat.exists
@@ -121,7 +128,7 @@
     enabled: "yes"
   tags:
     - geoserver
-  when: webserver_nginx
+  when: webserver_nginx | bool 
   become: true
 
 - name: restart apache2
@@ -158,6 +165,7 @@
     - geoserver
 
 - name: "update defaultVectorCacheFormats in gwc-gs.xml for vectortiles extension"
+  ignore_errors: yes # file does not exist in the current install
   xml:
     path: "{{data_dir}}/geoserver_data_dir/gwc-gs.xml"
     xpath: "/GeoServerGWCConfig/defaultVectorCacheFormats"
@@ -169,6 +177,7 @@
     - geoserver
 
 - name: "update defaultOtherCacheFormats in gwc-gs.xml for vectortiles extension"
+  ignore_errors: yes # file does not exist in the current install
   xml:
     path: "{{data_dir}}/geoserver_data_dir/gwc-gs.xml"
     xpath: "/GeoServerGWCConfig/defaultOtherCacheFormats"
@@ -217,7 +226,7 @@
     - properties
     - init-spatial-geoserver
 
-- name: copy geoserver script
+- name: copy geoserver.objects.xml
   template: src=geoserver.objects.xml dest={{data_dir}}/geoserver.objects.xml
   when: not skip_geoserver_script
   tags:
@@ -225,7 +234,7 @@
     - properties
     - init-spatial-geoserver
 
-- name: copy geoserver script
+- name: copy geoserver.distributions.xml
   template: src=geoserver.distributions.xml dest={{data_dir}}/geoserver.distributions.xml
   when: not skip_geoserver_script
   tags:
@@ -233,7 +242,7 @@
     - properties
     - init-spatial-geoserver
 
-- name: copy points style.xml
+- name: copy geoserver.points.xml
   template: src=geoserver.points.xml dest={{data_dir}}/geoserver.points.xml
   when: not skip_geoserver_script
   tags:
@@ -258,7 +267,7 @@
     - properties
     - init-spatial-geoserver
 
-- name: Running geoserver.sh
+- name: Running geoserver.sh (if the default geoserver workspaces still exist, run this manually)
   command: "{{data_dir}}/geoserver.sh"
   args:
     chdir: "{{data_dir}}"

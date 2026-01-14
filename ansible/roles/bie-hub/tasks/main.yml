@@ -1,5 +1,5 @@
 ---
-- include: ../../common/tasks/setfacts.yml
+- include_tasks: ../../common/tasks/setfacts.yml
   tags:
     - webapps
     - properties
@@ -36,6 +36,7 @@
   tags:
     - webapps
     - properties
+    - properties-file
     - bie
 
 - name: copy logback config
@@ -87,7 +88,10 @@
     - properties
     - bie
 
-- include: ../../apache_vhost/tasks/main.yml context_path='/{{ bie_hub_context_path }}' hostname='{{ bie_hub_hostname }}'
+- include_tasks: ../../apache_vhost/tasks/main.yml
+  vars:
+    context_path: '/{{ bie_hub_context_path }}'
+    hostname: '{{ bie_hub_hostname }}'
   tags:
     - webapps
     - apache_vhost
@@ -102,7 +106,7 @@
     - nginx_vhost
     - deploy
     - bie
-  when: webserver_nginx and bie_hub_proxy_target is not defined
+  when: webserver_nginx | bool  and bie_hub_proxy_target is not defined
 
 - name: Define basic nginx_paths
   set_fact:
@@ -152,7 +156,7 @@
         sort_label: "9_default"
         is_proxy: true
         proxy_pass: "http://{{ upstream_host }}:8080{{bie_hub_proxy_target}}"
-  when: webserver_nginx
+  when: webserver_nginx | bool 
   tags:
     - nginx_vhost
     - deploy
@@ -165,7 +169,7 @@
         sort_label: "1_ws"
         is_proxy: false
         rewrite: "$scheme://{{bie_index_hostname }}{{bie_index_context_path }}/$1$is_args$args"
-  when: webserver_nginx and bie_index_context_path != '/' and bie_index_context_path != ''
+  when: webserver_nginx | bool  and bie_index_context_path != '/' and bie_index_context_path != ''
   tags:
     - nginx_vhost
     - deploy
@@ -174,7 +178,7 @@
 - name: Append bie-ws additional path when needed
   set_fact:
      bie_nginx_paths: "{{ bie_nginx_additional_path + bie_nginx_paths }}"
-  when: webserver_nginx and bie_index_context_path != '/' and bie_index_context_path != ''
+  when: webserver_nginx | bool  and bie_index_context_path != '/' and bie_index_context_path != ''
   tags:
     - nginx_vhost
     - deploy
@@ -193,7 +197,7 @@
     - nginx_vhost
     - deploy
     - bie
-  when: webserver_nginx
+  when: webserver_nginx | bool 
 
 - name: copy all data assets
   copy: src={{item}} dest={{ data_dir }}/{{ bie_hub | default('generic-bie') }}/config

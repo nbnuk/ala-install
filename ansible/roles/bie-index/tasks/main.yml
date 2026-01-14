@@ -1,5 +1,5 @@
 ---
-- include: ../../common/tasks/setfacts.yml
+- include_tasks: ../../common/tasks/setfacts.yml
   tags:
     - webapps
     - config
@@ -38,6 +38,7 @@
     - webapps
     - config
     - properties
+    - properties-file
     - bie-index
 
 - name: copy all Properties config (old version)
@@ -107,7 +108,10 @@
     - properties
     - bie-index
 
-- include: ../../apache_vhost/tasks/main.yml context_path='/{{ bie_index_context_path }}' hostname='{{ bie_index_hostname }}'
+- include_tasks: ../../apache_vhost/tasks/main.yml
+  vars:
+    context_path: '/{{ bie_index_context_path }}'
+    hostname: '{{ bie_index_hostname }}'
   tags:
     - webapps
     - apache_vhost
@@ -122,7 +126,7 @@
     - nginx_vhost
     - deploy
     - bie_index
-  when: webserver_nginx and bie_index_proxy_target is not defined
+  when: webserver_nginx | bool  and bie_index_proxy_target is not defined
 
 - name: add nginx vhost if configured
   include_role:
@@ -186,7 +190,7 @@
     - bie-index
     - nginx_vhost
     - deploy
-  when: webserver_nginx
+  when: webserver_nginx | bool 
 
 - name: copy all data assets
   copy: src=subgroups.json dest=/srv/{{bie_index_hostname}}/www/

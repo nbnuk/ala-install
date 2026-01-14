@@ -1,5 +1,5 @@
 ---
-- include: ../../common/tasks/setfacts.yml
+- include_tasks: ../../common/tasks/setfacts.yml
   tags:
     - namematching-service
     - deploy
@@ -54,6 +54,7 @@
     - restart ala-namematching-service
   tags:
     - properties
+    - properties-file
     - namematching-service
 
 - name: Customize species group files
@@ -88,7 +89,7 @@
     - nginx_vhost
     - namematching-service
     - deploy
-  when: webserver_nginx
+  when: webserver_nginx | bool
 
 - name: Include docker tasks
   include_tasks: docker-tasks.yml

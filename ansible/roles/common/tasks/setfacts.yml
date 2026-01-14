@@ -87,6 +87,7 @@
     python_software_properties: "python3-software-properties"
     tomcat_dir: "/var/lib/{{ tomcat }}"
     tomcat_webapps: "/var/lib/{{ tomcat }}/webapps/"
+    mongodb_version: "{{ mongodb_version | default(5.0) | float }}"
     pg_version: "{{ pg_version | default('9.6') }}"
     postgis_version: "{{ postgis_version | default('2.4') }}"
     postgis_version_folder: "{{ postgis_version_folder | default('2.4') }}"
@@ -128,6 +129,7 @@
     python_software_properties: "python3-software-properties"
     tomcat_dir: "/var/lib/{{ tomcat }}"
     tomcat_webapps: "/var/lib/{{ tomcat }}/webapps/"
+    mongodb_version: "{{ mongodb_version | default(5.0) | float }}"
     pg_version: "{{ pg_version | default('10') }}"
     postgis_version: "{{ postgis_version | default('2.5') }}"
     postgis_version_folder: "{{ postgis_version_folder | default('2.5') }}"
@@ -169,11 +171,80 @@
     tomcat_dir: "/var/lib/{{ tomcat }}"
     tomcat_webapps: "/var/lib/{{ tomcat }}/webapps/"
     psycopg2_package: "python3-psycopg2"
+    mongodb_version: "{{ mongodb_version | default(8.0) | float }}"
     pg_version: "{{ pg_version | default('14') }}"
     postgis_version: "{{ postgis_version | default('3') }}"
     postgis_version_folder: "{{ postgis_version_folder | default('3') }}"
-    postgis_scripts_version: "{{ postgis_scripts_version | default('3.4') }}"
+    postgis_scripts_version: "{{ postgis_scripts_version | default('3.6') }}"
   when: ansible_os_family == "Debian" and ansible_distribution_version == "22.04"
+  tags:
+    - setfacts
+
+- name: set ubuntu-24.04 variables - overrides
+  set_fact:
+    tomcat: "{{ tomcat | default('tomcat10') }}"
+    tomcat_user: "{{ tomcat_user | default('tomcat') }}"
+  when: ansible_os_family == "Debian" and ansible_distribution_version == "24.04"
+  tags:
+  - setfacts
+
+- name: set ubuntu-24.04 variables
+  set_fact:
+    libtcnative: "libtcnative-1"
+    tomcat_package: "{{ tomcat }}"
+    tomcat_user: "{{ tomcat_user }}"
+    tomcat_conf: "/etc/default/{{ tomcat }}"
+    tomcat_conf_dir: "/etc/{{ tomcat }}"
+    tomcat_log_dir: "/var/log/{{ tomcat }}"
+    apache: "apache2"
+    nginx: "nginx"
+    postfix: "postfix"
+    mysql_service: "mysql"
+    mysql: "mysql-server-8.0"
+    cassandra_yaml: "/etc/cassandra/cassandra.yaml"
+    cassandra_user: "cassandra"
+    python_software_properties: "python3-software-properties"
+    tomcat_dir: "/var/lib/{{ tomcat }}"
+    tomcat_webapps: "/var/lib/{{ tomcat }}/webapps/"
+    psycopg2_package: "python3-psycopg2"
+    mongodb_version: "{{ mongodb_version | default(8.0) | float }}"
+    pg_version: "{{ pg_version | default('16') }}"
+    postgis_version: "{{ postgis_version | default('3') }}"
+    postgis_version_folder: "{{ postgis_version_folder | default('3') }}"
+    postgis_scripts_version: "{{ postgis_scripts_version | default('3.4') }}"
+  when: ansible_os_family == "Debian" and ansible_distribution_version == "24.04"
+  tags:
+    - setfacts
+
+- name: set java defaults for openjdk21 (amd64)
+  set_fact:
+    java_security_opts: -Dlog4j2.formatMsgNoLookups=true
+    java_home: /usr/lib/jvm/java-21-openjdk-amd64
+  when: use_openjdk21 is defined and use_openjdk21 | bool == True and ansible_architecture != "aarch64"
+  tags:
+    - setfacts
+
+- name: set java defaults for openjdk21 (arm64)
+  set_fact:
+    java_security_opts: -Dlog4j2.formatMsgNoLookups=true
+    java_home: /usr/lib/jvm/java-21-openjdk-arm64
+  when: use_openjdk21 is defined and use_openjdk21 | bool == True and ansible_architecture == "aarch64"
+  tags:
+    - setfacts
+
+- name: set java defaults for openjdk17 (amd64)
+  set_fact:
+    java_security_opts: -Dlog4j2.formatMsgNoLookups=true
+    java_home: /usr/lib/jvm/java-17-openjdk-amd64
+  when: use_openjdk17 is defined and use_openjdk17 | bool == True and ansible_architecture != "aarch64"
+  tags:
+    - setfacts
+
+- name: set java defaults for openjdk17 (arm64)
+  set_fact:
+    java_security_opts: -Dlog4j2.formatMsgNoLookups=true
+    java_home: /usr/lib/jvm/java-17-openjdk-arm64
+  when: use_openjdk17 is defined and use_openjdk17 | bool == True and ansible_architecture == "aarch64"
   tags:
     - setfacts
 
@@ -285,8 +356,8 @@
 
 - name: using the ALA nexus repository
   set_fact:
-    maven_repo_base_url: "https://nexus.ala.org.au/content/groups/"
-    maven_repo_url: "https://nexus.ala.org.au/content/groups/{{maven_release_dir|default('public')}}"
+    maven_repo_base_url: "https://nexus.ala.org.au/repository/"
+    maven_repo_url: "https://nexus.ala.org.au/repository/{{maven_release_dir|default('public')}}"
     maven_repo_ws_url: "https://nexus.ala.org.au/service/local/artifact/maven/redirect?r={{maven_release_dir | default('public')}}&g={{groupId | default('au.org.ala')}}&a={{artifactId | default('')}}&v={{version | default('')}}&e={{packaging | default('war')}}&c={{classifier | default('')}}"
   when: use_gbif_nexus is not defined or use_gbif_nexus == "false" or use_gbif_nexus == false
   tags:
@@ -340,3 +411,4 @@
     deployment_type: "{{ deployment_type | default('vm') }}"
   tags:
     - setfacts
+    - properties-file

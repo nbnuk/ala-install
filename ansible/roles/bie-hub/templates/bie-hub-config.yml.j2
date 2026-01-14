@@ -44,7 +44,7 @@ security:
 {% endif %}
   jwt:
     discoveryUri: {{ discoveryUri | default('') }}
-    clientId: {{ (bie_hub_clientId | default(clientId)) | default('') }}
+    clientId: {{ (ala_bie_client_id | default(clientId)) | default('') }}
 # cognito specific configs
 {% if auth_system is defined and auth_system == 'cognito' %}
     roleAttribute: {{ roleAttribute | default('') }}
@@ -62,12 +62,12 @@ security:
       serviceUrl: {{ apikey_userdetails_url | default('') }}
 webservice:
   jwt: {{ webservice_jwt | default('false') }}
-  jwt-scopes: {{ webservice_jwt_scopes | default('') }}
-  client-id: {{ webservice_clientId | default('') }}
-  client-secret: {{ webservice_secert | default('') }}
+  jwt-scopes: {{ ala_bie_webservice_jwt_scopes | default(webservice_jwt_scopes) | default('') }}
+  client-id: {{ ala_bie_client_id | default(webservice_clientId) | default('') }}
+  client-secret: {{ ala_bie_client_secret | default(webservice_secert) | default('') }}
 disableCAS: {{ bypass_cas }}
 userDetails:
-  url: {{ userdetails_url | default('https://auth.ala.org.au/userdetails/') }}
+  url: {{ bie_userdetails_url | default(userdetails_url) | default('https://auth.ala.org.au/userdetails/') }}
 
 # BIE index webservices
 bie:
@@ -83,15 +83,17 @@ bieService:
   apiKey: {{ bie_index_api_key }}
 biocacheService:
   baseURL: {{ biocache_service_url }}
-  queryContext: {{ biocache_query_context }}
+  queryContext: {{ bie_biocache_query_context | default(biocache_query_context) }}
 {% if biocache_service_alt_query_context is defined %}
   altQueryContext: {{ biocache_service_alt_query_context }}
 {% endif %}
+
 
 # Header and footer
 headerAndFooter:
   baseURL: {{ header_and_footer_baseurl }}
   version: {{ header_and_footer_version }}
+  challengeJsUrl: {{ header_and_footer_challenge_js_url | default('') }}
 
 ala:
   baseURL: {{ ala_base_url }}
@@ -135,7 +137,7 @@ collectory:
   baseURL: {{ collectory_url }}
   threatenedSpeciesCodesUrl: {{ collectory_url }}/public/showDataResource
 collectoryService:
-  baseURL: {{ collectory_service_url | default(collectory_url) }}
+  baseURL: {{ bie_hub_collectory_service_url | default(collectory_service_url) | default(collectory_url) }}
 speciesList:
   baseURL: {{ species_list_url }}
   preferredSpeciesListDruid: {{ specieslist_preferredDruid }}
@@ -153,7 +155,9 @@ sightings:
   url: {{ sightings_url }}
 layersService:
   baseURL: {{ layers_service_url | default(layers_url) }}
+# Both are currently used
 imageServiceBaseURL: {{ image_webservice_url | default(image_service_url)}}
+imageServiceBaseUrl: {{ image_webservice_url | default(image_service_url)}}
 
 image:
   baseUrl: {{ image_service_url }}
@@ -260,7 +264,7 @@ survey:
     html: {{ bie_survey_html | default('') }}
 
 userdetails:
-url: {{ userdetails_url | default('https://auth.ala.org.au/userdetails') }}
+  url: {{ bie_userdetails_url | default(userdetails_url) | default('https://auth.ala.org.au/userdetails') }}
 imageFilter: {{ bie_image_filter | default("'&fq=spatiallyValid:true&fq=-user_assertions:50001&fq=-user_assertions:50005&fq=-duplicate_status:ASSOCIATED&fq=-duplicateType:DIFFERENT_DATASET'") }}
 userdetails.web.url: {{ userdetails_web_url | default('https://auth.ala.org.au/userdetails/') }}
 userdetails.api.url: {{ userdetails_api_url | default('https://api.ala.org.au/userdetails/') }}

@@ -1,4 +1,4 @@
-- include: ../../common/tasks/setfacts.yml
+- include_tasks: ../../common/tasks/setfacts.yml
   tags:
     - image-service
     - properties
@@ -13,7 +13,10 @@
     - image-service
     - properties
 
-- include: ../../apache_vhost/tasks/main.yml context_path='{{ image_service_context_path }}' hostname='{{ image_service_hostname }}'
+- include_tasks: ../../apache_vhost/tasks/main.yml
+  vars:
+    context_path: '{{ image_service_context_path }}'
+    hostname: '{{ image_service_hostname }}'
   tags:
     - deploy
     - apache_vhost
@@ -36,7 +39,7 @@
     - nginx_vhost
     - deploy
     - image-service
-  when: webserver_nginx
+  when: webserver_nginx | bool 
 
 - name: ensure www directory exists
   file: path={{item}} state=directory
@@ -74,6 +77,7 @@
     - deploy
     - image-service
     - properties
+    - properties-file
 
 - name: add image-service jar and setup service
   include_role:
@@ -81,7 +85,8 @@
   vars:
     service_name: 'image-service'
     jar_url: '{{ image_service_jar_url }}'
-    use_openjdk11: "{{ image_service_version is version('1.1.7.1', '>') }}"
+    use_openjdk21: "{{ image_service_version is version('3.1.0', '>=') }}"
+    use_openjdk11: "{{ image_service_version is version('1.1.7.1', '>') and image_service_version is version('3.1.0', '<') }}"
     use_openjdk8: "{{ image_service_version is version('1.1.7.1', '<=') }}"
     log_config_filename: "{{ image_service_logfile }}"
     java_headless: True

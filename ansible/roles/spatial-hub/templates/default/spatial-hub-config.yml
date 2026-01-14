@@ -47,8 +47,11 @@ bie.searchPath: '/search'
 bieService:
     baseURL: "{{ bie_service_base_url | default('https://bie-ws.ala.org.au/ws') }}"
 
+namematching:
+  baseURL: "{{ namematching_url | default('https://namematching-ws.ala.org.au') }}"
+
 userdetails:
-    baseUrl: "{{ user_details_base_url | default('https://auth.ala.org.au/userdetails') }}"
+    baseUrl: "{{ spatial_user_details_base_url | default(user_details_base_url) | default('https://auth.ala.org.au/userdetails') }}"
 
 favicon:
     url: "{{ favicon_url | default('https://www.ala.org.au/wp-content/themes/ala2011/images/favicon.ico') }}"
@@ -142,7 +145,7 @@ speciesDotSize: {{ species_dot_size | default(5) }}
 speciesDotOpacity: {{ species_dot_opacity | default(60) }}
 
 logger:
-    baseUrl: "{{ logger_base_url | default('https://logger.ala.org.au/service') }}"
+    baseUrl: "{{ spatial_logger_base_url | default(logger_base_url) | default('https://logger.ala.org.au/service') }}"
 
 phylolink:
     url: "{{ phylolink_url | default('https://phylolink.ala.org.au') }}"
@@ -214,7 +217,7 @@ defaultareas:
       areaSqKm: {{ default_area_sqkm }}
       bbox: {{ default_area_bbox }}
     - name: 'World'
-      fqs: []
+      fqs: ['longitude:[-180 TO 180]', 'latitude:[-90 TO 90]']
       wkt: 'POLYGON((-180 -90.0,180.0 -90.0,180.0 90.0,-180 90.0,-180 -90.0))'
       areaSqKm: 510000000
       bbox: [-180, -90, 180, 90]
