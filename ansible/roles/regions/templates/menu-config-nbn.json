@@ -22,5 +22,9 @@
 {
   "label": "National Parks",
   "fid": "cl251"
+},
+{
+  "label": "Sites of Special Scientific Interest England",
+  "fid": "cl280"
 }
 ]
