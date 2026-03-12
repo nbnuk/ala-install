@@ -1,0 +1,46 @@
+[
+{
+  "label": "Local Authorities",
+  "fid": "cl128"
+},
+{
+  "label": "Environmentally Sensitive Areas",
+  "fid": "cl35"
+},
+{ 
+  "label": "National Nature Reserves",
+  "fid": "cl122"
+},
+{
+  "label": "National Parks",
+  "fid": "cl250"
+},
+{
+  "label": "National Scenic Areas",
+  "fid": "cl36"
+},
+{
+  "label": "Nature Conservation Marine Protected Areas",
+  "fid": "cl263"
+},
+{
+  "label": "Nitrate Vulnerable Zones",
+  "fid": "cl171"
+},
+{
+  "label": "Sites of Special Scientific Interest",
+  "fid": "cl265"
+},
+{
+  "label": "Special Areas of Conservation",
+  "fid": "cl177"
+},
+{
+  "label": "Special Protection Areas",
+  "fid": "cl264"
+},
+{
+  "label": "Wetlands of International Importance RAMSAR",
+  "fid": "cl267"
+}
+]

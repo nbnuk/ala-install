@@ -1,0 +1,35 @@
+[
+  {
+    "label": "County Boundaries (Northern Ireland)",
+    "fid": "cl127"
+  },
+  {
+    "label": "Vice counties (Ireland)",
+    "fid": "cl133"
+  },
+  {
+    "label": "Areas of Special Scientific Interest",
+    "fid": "cl90"
+  }
+,{
+  "label": "Special Areas of Conservation",
+  "fid": "cl94"
+}
+,{
+  "label": "Special Protection Areas",
+  "fid": "cl95"
+}
+,{
+  "label": "Areas of Outstanding Natural Beauty",
+  "fid": "cl91"
+}
+,{
+  "label": "RAMSAR Sites",
+  "fid": "cl93"
+}
+,{
+  "label": "Marine Inshore Conservation Zones",
+  "fid": "cl92"
+}
+]
+
