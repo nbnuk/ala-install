@@ -1,0 +1,116 @@
+- name: Install ClamAV and ClamAV Daemon
+  apt:
+    name:
+      - clamav
+      - clamav-daemon
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+  tags:
+    - clamav
+
+- name: Install ClamAV and ClamAV Daemon (RHEL-based)
+  yum:
+    name:
+      - clamav
+      - clamav-update
+      - clamav-scanner-systemd
+    state: present
+  when: ansible_os_family == "RedHat"
+  tags:
+    - clamav
+
+
+- name: Ensure freshclam.conf exists
+  copy:
+    dest: /etc/clamav/freshclam.conf
+    content: |
+      DatabaseOwner clamav
+      UpdateLogFile /var/log/clamav/freshclam.log
+      LogTime yes
+      LogVerbose yes
+      DatabaseDirectory /var/lib/clamav
+      DNSDatabaseInfo current.cvd.clamav.net
+      DatabaseMirror database.clamav.net
+      ConnectTimeout 30
+      ReceiveTimeout 30
+      MaxAttempts 5
+      ScriptedUpdates yes
+      Checks 12
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - clamav
+
+
+- name: Ensure clamd.conf exists
+  copy:
+    dest: /etc/clamav/clamd.conf
+    content: |
+      LogFile /var/log/clamav/clamd.log
+      LogTime yes
+      LogVerbose yes
+      PidFile /var/run/clamav/clamd.pid
+      DatabaseDirectory /var/lib/clamav
+      LocalSocket /var/run/clamav/clamd.ctl
+      FixStaleSocket yes
+      TCPSocket 3310
+      TCPAddr 127.0.0.1
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - clamav
+
+- name: add configuration file to freshclam service
+  lineinfile:
+    path: /lib/systemd/system/clamav-freshclam.service
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    create: yes
+  loop:
+    - { regexp: '^ExecStart=', line: 'ExecStart=/usr/bin/freshclam --config-file=/etc/clamav/freshclam.conf -d --foreground=true' }
+  notify:
+    - reload systemd daemon
+    - restart clamav-freshclam
+  tags:
+    - clamav
+
+- name: run clamav-daemon with above configuration file
+  lineinfile:
+    path: /lib/systemd/system/clamav-daemon.service
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    create: yes
+  loop:
+    - { regexp: '^ExecStart=', line: 'ExecStart=/usr/sbin/clamd -c /etc/clamav/clamd.conf --foreground=true' }
+  notify:
+    - reload systemd daemon
+    - restart clamav-daemon.socket
+  tags:
+    - clamav
+
+# tcp port is disabled by default, so we need to enable it
+- name: Add tcp port to clamav daemon socket configuration
+  lineinfile:
+    path: /lib/systemd/system/clamav-daemon.socket
+    regexp: "^#?ListenStream=1024"
+    line: "ListenStream=127.0.0.1:3310"
+    insertafter: '^#?ListenStream='
+  notify:
+    - reload systemd daemon
+    - restart clamav-daemon.socket
+  tags:
+    - clamav
+
+- name: add cron job to send email notification when clamav daemon is down
+  cron:
+    name: "notify when replica clam anti-virus daemon is down"
+    hour: "*"
+    minute: "*"
+    job: "pgrep clamd > /dev/null && rm -f /tmp/clamd_alert_sent || ( [ ! -f /tmp/clamd_alert_sent ] && echo \"Clamd down at $(date) on {{ inventory_hostname }}\" | mail -s \"Clam anti-virus alert\" {{ email_address | default('merit-team@ala.org.au') }} && touch /tmp/clamd_alert_sent )"
+  tags:
+    - clamav
+    - cron
+  when: clamav_notification | bool

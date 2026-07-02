@@ -1,0 +1,20 @@
+---
+image_optimisation_packages:
+  - ImageMagick
+  - libjpeg-turbo-utils
+  - jpegoptim
+  # - mozjpeg
+  - optipng
+  - zopfli
+  - pngquant
+  - gifsicle
+  - libwebp-tools
+  - libavif
+libvips_packages:
+  - vips
+  - vips-tools
+  - vips-devel
+  - libjpeg-turbo
+  - libpng
+  - libwebp
+  - libtiff
