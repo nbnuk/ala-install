@@ -62,7 +62,7 @@
     <store class="dataStore">
         <name>ALA:LayersDB</name>
         <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate"
-                   href="http://spatial.ala.org.au/geoserver/rest/workspaces/ALA/datastores/LayersDB.xml"
+                   href="{{geoserver_url}}/geoserver/rest/workspaces/ALA/datastores/LayersDB.xml"
                    type="application/xml"/>
     </store>
     <maxFeatures>0</maxFeatures>
