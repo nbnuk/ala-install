@@ -21,12 +21,42 @@
     - "spatial-hub-config.yml"
     - "menu-config.json"
     - "view-config.json"
+  when: spatial_hub_hub_name is not defined
   tags:
     - config
     - spatial-hub
     - spatial-hub-config
     - properties
     - properties-file
+
+- name: ensure target directories exist [data subdirectories etc.] for hub
+  file: path={{item}} state=directory owner={{tomcat_user}} group={{tomcat_user}}
+  with_items:
+    - "{{data_dir}}/spatial-hub/config/{{spatial_hub_hub_name}}"
+  when: spatial_hub_hub_name is defined
+  tags:
+    - spatial-hub
+    - spatial-hub-config
+    - properties
+
+- name: copy all config.yml for hub
+  template:
+    src: "{{spatial_hub_portal|lower}}/{{item}}"
+    dest: "{{data_dir}}/spatial-hub/config/{{spatial_hub_hub_name}}/{{item}}"
+    owner: "{{tomcat_user}}"
+    group: "{{tomcat_user}}"
+  with_items:
+    - "app-config.json"
+    - "menu-config.json"
+    - "view-config.json"
+  when: spatial_hub_hub_name is defined
+  tags:
+    - config
+    - spatial-hub
+    - spatial-hub-config
+    - properties
+    - properties-file
+
 
 - name: copy system message
   template: src=system-message.json dest={{data_dir}}/spatial-hub/config/system-message.json owner={{tomcat_user}} group={{tomcat_user}}

@@ -1,0 +1,51 @@
+{
+  "ala": {
+    "baseURL": "{{ ala_base_url | default('https://www.ala.org.au') }}"
+  },
+  "skin": {
+    "header": true,
+    "footer": true,
+    "fluidLayout": true,
+    "layout": "{{ spatial_hub_skin_layout | default('portal') }}",
+    "orgNameLong": "{{ orgNameLong | default('Atlas of Living Australia') }}",
+    "orgNameShort": "{{ orgNameShort | default('ALA') }}",
+    "favicon": "{{ skin_favicon | default('https://www.ala.org.au/app/uploads/2019/01/cropped-favicon-32x32.png') }}"
+  },
+  "headerAndFooter": {
+    "baseURL": "{{ header_and_footer_baseurl | default('https://www.ala.org.au/commonui-bs3-2019') }}"
+  },
+  "qc":"{{ spatial_biocache_query_context | default(biocache_query_context) }}",
+  "startup": {
+    "lat": "{{ startup_lat | default(-25) }}",
+    "lng": "{{ startup_lng | default(131) }}",
+    "zoom": "{{ startup_zoom | default(4) }}",
+    "baselayer": {
+      "default": "{{ startup_baselayer_default | default('osm') }}"
+    },
+    "baselayers": {
+      "osm": {
+        "name": "OpenStreetMap",
+        "url": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "type": "xyz",
+        "exportType": "minimal",
+        "link": "https://www.openstreetmap.org/about",
+        "projections": [
+          "3857"
+        ],
+        "layerParams": {
+          "attribution": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
+        }
+      },
+      "google_satellite": {
+        "name": "Satellite",
+        "layerType": "SATELLITE",
+        "type": "google",
+        "exportType": "satellite",
+        "link": "https://www.google.com/intl/en_au/help/terms_maps.html",
+        "projections": [
+          "3857"
+        ]
+      }
+    }
+  }
+}
