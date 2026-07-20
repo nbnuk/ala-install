@@ -1,26 +1,26 @@
 {
   "ala": {
-    "baseURL": "{{ ala_base_url | default('https://www.ala.org.au') }}"
+    "baseURL": {{ ala_base_url | default('https://www.ala.org.au') | to_json  }}
   },
   "skin": {
     "header": true,
     "footer": true,
     "fluidLayout": true,
-    "layout": "{{ spatial_hub_skin_layout | default('portal') }}",
-    "orgNameLong": "{{ orgNameLong | default('Atlas of Living Australia') }}",
-    "orgNameShort": "{{ orgNameShort | default('ALA') }}",
-    "favicon": "{{ skin_favicon | default('https://www.ala.org.au/app/uploads/2019/01/cropped-favicon-32x32.png') }}"
+    "layout": {{ spatial_hub_skin_layout | default('portal')  | to_json }},
+    "orgNameLong": {{ orgNameLong | default('Atlas of Living Australia') | to_json  }},
+    "orgNameShort": {{ orgNameShort | default('ALA')  | to_json }},
+    "favicon": {{ skin_favicon | default('https://www.ala.org.au/app/uploads/2019/01/cropped-favicon-32x32.png') | to_json }}
   },
   "headerAndFooter": {
-    "baseURL": "{{ header_and_footer_baseurl | default('https://www.ala.org.au/commonui-bs3-2019') }}"
+    "baseURL": {{ header_and_footer_baseurl | default('https://www.ala.org.au/commonui-bs3-2019')  | to_json }}
   },
-  "qc":"{{ spatial_biocache_query_context | default(biocache_query_context) }}",
+  "qc": {{ spatial_biocache_query_context | default(biocache_query_context) | to_json }},
   "startup": {
-    "lat": "{{ startup_lat | default(-25) }}",
-    "lng": "{{ startup_lng | default(131) }}",
-    "zoom": "{{ startup_zoom | default(4) }}",
+    "lat": {{ startup_lat | default(-25) }},
+    "lng": {{ startup_lng | default(131) }},
+    "zoom": {{ startup_zoom | default(4) }},
     "baselayer": {
-      "default": "{{ startup_baselayer_default | default('osm') }}"
+      "default": {{ startup_baselayer_default | default('osm') | to_json }}
     },
     "baselayers": {
       "osm": {
