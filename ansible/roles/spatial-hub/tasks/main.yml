@@ -29,6 +29,21 @@
     - properties
     - properties-file
 
+- name: copy all assets
+  template:
+    src: "{{spatial_hub_portal|lower}}/{{item}}"
+    dest: "{{data_dir}}/spatial-hub/{{item}}"
+    owner: "{{tomcat_user}}"
+    group: "{{tomcat_user}}"
+  loop: "{{ spatial_hub_assets }}"
+  when: spatial_hub_assets is defined and spatial_hub_hub_name is not defined
+  tags:
+    - config
+    - spatial-hub
+    - spatial-hub-config
+    - properties
+    - properties-file
+
 - name: ensure target directories exist [data subdirectories etc.] for hub
   file: path={{item}} state=directory owner={{tomcat_user}} group={{tomcat_user}}
   with_items:
