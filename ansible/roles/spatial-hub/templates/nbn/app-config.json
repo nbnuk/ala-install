@@ -47,5 +47,17 @@
         ]
       }
     }
-  }
+  },
+  "defaultareas": [
+    {
+    "name": "{{ default_area_name }}",
+    "fqs": [
+      "longitude:[{{ default_area_bbox[0] }} TO {{ default_area_bbox[2] }}]",
+      "latitude:[{{ default_area_bbox[1] }} TO {{ default_area_bbox[3] }}]"
+    ],
+    "wkt": "POLYGON(({{ default_area_bbox[0] }} {{ default_area_bbox[1] }}, {{ default_area_bbox[2] }} {{ default_area_bbox[1] }}, {{ default_area_bbox[2] }} {{ default_area_bbox[3] }}, {{ default_area_bbox[0] }} {{ default_area_bbox[3] }}, {{ default_area_bbox[0] }} {{ default_area_bbox[1] }}))",
+    "areaSqKm": "{{ default_area_sqkm }}",
+    "bbox": "{{ default_area_bbox }}"
+    }
+  ]
 }
