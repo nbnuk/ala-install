@@ -1,0 +1,11 @@
+spatial_help_items:
+  - name: "Getting Started"
+    open: "https://www.ala.org.au/spatial-portal-help/getting-started"
+  - name: "Add To Map"
+    open: "https://www.ala.org.au/spatial-portal-help/add-to-map"
+  - name: "Tools"
+    open: "https://www.ala.org.au/spatial-portal-help/tools"
+  - name: "Import"
+    open: "https://www.ala.org.au/spatial-portal-help/import"
+  - name: "Export"
+    open: "https://www.ala.org.au/spatial-portal-help/export"
