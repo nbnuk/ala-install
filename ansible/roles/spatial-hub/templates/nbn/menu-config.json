@@ -34,56 +34,24 @@
         "open": "AreaReport"
       },
       {
-        "name": "Scatterplot - single",
-        "open": "ScatterplotCreate"
-      },
-      {
-        "name": "Scatterplot - multiple",
-        "open": "ScatterplotList"
-      },
-      {
         "name": "Tabulate - 1D",
         "open": "SpeciesByLayer"
-      },
-      {
-        "name": "Tabulate - 2D",
-        "open": "tabulate"
       },
       {
         "name": "Taxon Frequency",
         "open": "TaxonFrequency"
       },
       {
-        "name": "Compare Points",
-        "open": "pointComparison"
-      },
-      {
         "name": "Compare Areas",
         "open": "CompareAreas"
-      },
-      {
-        "name": "Generate Points",
-        "open": "GeneratePoints"
       },
       {
         "name": "Points to Grid",
         "open": "PointsToGrid"
       },
       {
-        "name": "Double Gridding",
-        "open": "DoubleGridding"
-      },
-      {
         "name": "Calculate AOO and EOO",
         "open": "AooEoo"
-      },
-      {
-        "name": "Predict",
-        "open": "Maxent"
-      },
-      {
-        "name": "Classify",
-        "open": "Classification"
       },
       {
         "name": "Nearest Locality",
@@ -102,10 +70,6 @@
     "name": "Import",
     "width": 78,
     "items": [
-      {
-        "name": "Points",
-        {{ '"open": "addPoints"' if use_spatial_sandbox is defined and use_spatial_sandbox else '"open": "sandBox", "params": { "display": { "size": "full" } }' }}
-      },
       {
         "name": "Species List",
         "open": "createSpeciesList",
@@ -139,16 +103,8 @@
         "open": "ToolExportChecklistService"
       },
       {
-        "name": "Points",
-        "open": "ToolExportSampleService"
-      },
-      {
         "name": "Areas",
         "open": "ToolExportAreaService"
-      },
-      {
-        "name": "Points to BCCVL",
-        "open": "exportBccvl"
       }
     ]
   },
