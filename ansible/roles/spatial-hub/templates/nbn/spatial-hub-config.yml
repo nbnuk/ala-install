@@ -377,3 +377,12 @@ projection:
 
 spApp:
   optionsDownloadMap: false
+  layers:
+    species:
+      enabledColorTypes:
+        - osgrid
+        - point
+      defaults:
+        colorType: osgrid
+        gridResolution: variablegrid
+        showGridLabels: true
