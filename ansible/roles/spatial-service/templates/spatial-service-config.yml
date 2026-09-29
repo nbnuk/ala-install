@@ -12,7 +12,11 @@ geoserver:
 # remote server. This will cause layer files to be copied to geoserver_data_dir/data/
   remote:
     geoserver_data_dir: "{{ geoserver_data_dir | default('/data/geoserver_data_dir') }}"
-
+{% if spatial_service_geoserver_colocated is defined and spatial_service_geoserver_colocated %}
+  spatialservice:
+    #if colocated, geoserver will load data from spatial service data folder, /data/spatial-data by default
+    colocated: true
+{% endif %}
 shpResolutions: {{ shp_resolutions | default([0.5, 0.25, 0.1, 0.05]) }}
 grdResolutions: {{ grd_resolutions | default([0.5, 0.25, 0.1, 0.05, 0.01]) }}
 
