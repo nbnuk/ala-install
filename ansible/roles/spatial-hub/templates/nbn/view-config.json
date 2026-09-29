@@ -1,4 +1,14 @@
 {
+  "ToolAddSpeciesService":{
+    "view": [
+      {
+        "name":"Select species.",
+        "inputs":["0"]},
+      {
+        "name":"Restrict to an area.",
+        "inputs":["2"]}
+    ]
+  },
   "AooEoo": {
     "view": [
       {
